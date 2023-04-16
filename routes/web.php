@@ -19,13 +19,21 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.modules.home.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/home',function () {
+    return view('user.modules.home.index');
+})->name('home');
+
+Route::get('/program',function () {
+    return view('user.modules.program.index');
+})->name('program');
+
+Route::get('/404',function () {
+    return view('error.error');
+});
 Route::middleware('auth')->group(function () {
-    Route::get('/home',function () {
-        return view('user.modules.home.index');
-    });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
