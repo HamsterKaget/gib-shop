@@ -126,53 +126,60 @@
                     </ul>
                 </div>
                 <div class="w-full">
+                    @guest
                     <div class="flex justify-center mb-4 w-full px-6">
-                        <div class="relative w-full">
-                            <div class="text-gray-600 absolute ml-4 inset-0 m-auto w-4 h-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1" stroke="#A0AEC0" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <circle cx="10" cy="10" r="7"></circle>
-                                    <line x1="21" y1="21" x2="15" y2="15"></line>
-                                </svg>
-                            </div>
-                            <input class="focus:outline-none rounded w-full text-sm text-gray-500 placeholder-gray-600 bg-gray-100 pl-10 py-2" type="text" placeholder="Search" />
-                        </div>
+                        <a href="{{ route('login') }}" class="bg-indigo-500 text-indigo-50 py-2 px-4 text-sm">Log in</a>
                     </div>
-                    <div class="border-t border-gray-300">
-                        <div class="w-full flex items-center justify-between px-6 pt-1">
-                            <div class="flex items-center">
-                                <img alt="display avatar" role="img" src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png" class="w-8 h-8 rounded-md" />
-                                <p class="text-gray-800 text-base leading-4 ml-2">Jane Doe</p>
+                    @endguest
+                    @auth
+                        <div class="flex justify-center mb-4 w-full px-6">
+                            <div class="relative w-full">
+                                <div class="text-gray-600 absolute ml-4 inset-0 m-auto w-4 h-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1" stroke="#A0AEC0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z"></path>
+                                        <circle cx="10" cy="10" r="7"></circle>
+                                        <line x1="21" y1="21" x2="15" y2="15"></line>
+                                    </svg>
+                                </div>
+                                <input class="focus:outline-none rounded w-full text-sm text-gray-500 placeholder-gray-600 bg-gray-100 pl-10 py-2" type="text" placeholder="Search" />
                             </div>
-                            <ul class="flex">
-                                <li class="cursor-pointer text-white pt-5 pb-3">
-                                    <a href="javascript:void(0)">
-                                    <svg aria-label="open chats" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#718096" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z"></path>
-                                        <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
-                                        <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
-                                    </svg>
-                                    </a>
-                                </li>
-                                <li class="cursor-pointer text-white pt-5 pb-3 pl-3">
-                                    <a href="javascript:void(0)">
-                                    <svg aria-label="open notifications" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#718096" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z"></path>
-                                        <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
-                                        <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
-                                    </svg>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
-                    </div>
+                        <div class="border-t border-gray-300">
+                            <div class="w-full flex items-center justify-between px-6 pt-1">
+                                <div class="flex items-center">
+                                    <img alt="display avatar" role="img" src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png" class="w-8 h-8 rounded-md" />
+                                    <p class="text-gray-800 text-base leading-4 ml-2">Jane Doe</p>
+                                </div>
+                                <ul class="flex">
+                                    <li class="cursor-pointer text-white pt-5 pb-3">
+                                        <a href="javascript:void(0)">
+                                        <svg aria-label="open chats" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#718096" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z"></path>
+                                            <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
+                                            <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
+                                        </svg>
+                                        </a>
+                                    </li>
+                                    <li class="cursor-pointer text-white pt-5 pb-3 pl-3">
+                                        <a href="javascript:void(0)">
+                                        <svg aria-label="open notifications" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#718096" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z"></path>
+                                            <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
+                                            <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+                                        </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </div>
     </div>
     <!-- Mobile -->
-    <nav class="w-full mx-auto bg-white shadow">
-        <div class="container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
+    <nav class="mx-auto bg-white shadow">
+        <div class="w-[90vw] container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
             <div class="h-full flex items-center">
                 <div aria-label="Home" role="img" class="mr-10 flex items-center">
                     <svg  id="logo" enable-background="new 0 0 300 300" height="44" viewBox="0 0 300 300" width="43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -186,72 +193,90 @@
                     <h3 class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block">GatheringInBali</h3>
                 </div>
                 <ul class="pr-12 xl:flex items-center h-full hidden">
-                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-indigo-700 tracking-normal border-b-2 border-indigo-700"><a href="javascript:void(0)">Home</a></li>
-                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-10 tracking-normal" ><a href="javascript:void(0)">Bootcamp</a></li>
-                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal"><a href="javascript:void(0)">Mini Event</a></li>
-                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal"><a href="javascript:void(0)">Corporate Services</a></li>
+                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm tracking-normal {{ Route::is('home') ? 'border-b-2 border-indigo-700 text-indigo-700' : 'text-gray-800' }}"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm mx-10 tracking-normal {{ Route::is('bootcamp') ? 'border-b-2 border-indigo-700 text-indigo-700' : 'text-gray-800' }}"><a href="{{ route('bootcamp') }}">Bootcamp</a></li>
+                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm mr-10 tracking-normal {{ Route::is('mini-event') ? 'border-b-2 border-indigo-700 text-indigo-700' : 'text-gray-800' }}"><a href="{{ route('mini-event') }}">Mini Event</a></li>
+                    <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm tracking-normal"><a href="javascript:void(0)">Corporate Services</a></li>
                 </ul>
             </div>
             <div class="h-full xl:flex items-center justify-end hidden">
                 <div class="w-full h-full flex items-center">
-                    <div class="w-full pr-12 h-full flex items-center border-r">
-                        <div class="relative w-full">
-                            <div class="text-gray-600 absolute ml-3 inset-0 m-auto w-4 h-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <circle cx="10" cy="10" r="7" />
-                                    <line x1="21" y1="21" x2="15" y2="15" />
-                                </svg>
+                    @guest()
+                        <div class="w-full h-full flex items-center">
+                            <a href="{{ route('login') }}" class="border-indigo-500 border-2 text-indigo-500 py-2 px-6 text-sm rounded-md mx-2">Log In</a>
+                            <a href="{{ route('register') }}" class="bg-indigo-500 border-indigo-500 border-2 text-indigo-50 py-2 px-6 mx-2 text-sm rounded-md">Register</a>
+                            {{-- <div class="w-full">
+                                <a href="{{ route('register') }}" class="border-indigo-500 border-2 text-indigo-500 py-2 px-6 text-sm rounded-md">Sign Up</a>
+                            </div> --}}
+                        </div>
+                    @endguest
+                    @auth()
+                        <div class="w-full pr-12 h-full flex items-center border-r">
+                            <div class="relative w-full">
+                                <div class="text-gray-600 absolute ml-3 inset-0 m-auto w-4 h-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <circle cx="10" cy="10" r="7" />
+                                        <line x1="21" y1="21" x2="15" y2="15" />
+                                    </svg>
+                                </div>
+                                <input class="border border-gray-100 focus:outline-none focus:border-indigo-700 w-56 rounded text-sm text-gray-500 placeholder-gray-600 bg-gray-100 pl-8 py-2" type="text" placeholder="Search" />
                             </div>
-                            <input class="border border-gray-100 focus:outline-none focus:border-indigo-700 w-56 rounded text-sm text-gray-500 placeholder-gray-600 bg-gray-100 pl-8 py-2" type="text" placeholder="Search" />
                         </div>
-                    </div>
-                    <div class="w-full h-full flex ml-8">
-                        {{-- <div class="w-32 h-full flex items-center justify-center border-r cursor-pointer text-gray-600"> --}}
-                            {{-- <a aria-label="show notifications" role="link" href="javascript:void(0)" class="cursor-pointer w-6 h-6 xl:w-auto xl:h-auto text-gray-600">
-                                <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
-                                    <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
-                                </svg>
-                            </a> --}}
-                        {{-- </div> --}}
-                        <div aria-haspopup="true" class="cursor-pointer w-full flex items-center justify-end relative" onclick="dropdownHandler(this)">
-                            <button aria-haspopup="true" onclick="dropdownHandler(this)" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 rounded flex items-center" >
-                                <img class="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" />
-                                <p class="text-gray-800 text-sm ml-2">Jane Doe</p>
-                            </button>
-                            <ul class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-64 hidden">
-                                <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                    <div class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <div class="w-full h-full flex ml-8">
+                            {{-- <div class="w-32 h-full flex items-center justify-center border-r cursor-pointer text-gray-600"> --}}
+                                {{-- <a aria-label="show notifications" role="link" href="javascript:void(0)" class="cursor-pointer w-6 h-6 xl:w-auto xl:h-auto text-gray-600">
+                                    <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z"></path>
+                                        <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
+                                        <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+                                    </svg>
+                                </a> --}}
+                            {{-- </div> --}}
+                            <div aria-haspopup="true" class="cursor-pointer w-full flex items-center justify-end relative" onclick="dropdownHandler(this)">
+                                <button aria-haspopup="true" onclick="dropdownHandler(this)" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 rounded flex items-center" >
+                                    <img class="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" />
+                                    <p class="text-gray-800 text-sm ml-2">Jane Doe</p>
+                                </button>
+                                <ul class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-64 hidden">
+                                    {{-- <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <circle cx="12" cy="7" r="4" />
+                                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                            </svg>
+                                            <a href="javascript:void(0)" class="ml-2">My Profile</a>
+                                        </div>
+                                    </li> --}}
+                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" />
-                                            <circle cx="12" cy="7" r="4" />
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                            <circle cx="12" cy="12" r="9" />
+                                            <line x1="12" y1="17" x2="12" y2="17.01" />
+                                            <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
                                         </svg>
-                                        <a href="javascript:void(0)" class="ml-2">My Profile</a>
-                                    </div>
-                                </li>
-                                <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <circle cx="12" cy="12" r="9" />
-                                        <line x1="12" y1="17" x2="12" y2="17.01" />
-                                        <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-                                    </svg>
-                                    <a href="javascript:void(0)" class="ml-2">Help Center</a>
-                                </li>
-                                <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg>
-                                    <a href="javascript:void(0)" class="ml-2">Account Settings</a>
-                                </li>
-                            </ul>
+                                        <a href="javascript:void(0)" class="ml-2">Help Center</a>
+                                    </li>
+                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" />
+                                            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
+                                        <a href="javascript:void(0)" class="ml-2">Account Settings</a>
+                                    </li>
+                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <i class="fa-solid fa-right-from-bracket ml-1"></i>
+                                            <button type="submit" class="ml-2">Log Out</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    @endauth
                 </div>
             </div>
             <div class="visible xl:hidden flex items-center">

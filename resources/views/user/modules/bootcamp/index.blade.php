@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+{{-- @extends('user.layouts.app')
 
 @section('title', 'My Page Title')
 
@@ -92,4 +92,34 @@
     });
     </script>
 
+@endpush --}}
+
+@extends('user.layouts.app')
+
+@section('title', 'My Page Title')
+
+@push('css')
+    <!-- Add Swiper JS and CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 @endpush
+
+@section('content')
+    <div class="container max-w-7xl mx-auto  w-full h-full">
+
+    </div>
+@endsection
+
+@push('js')
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        // Optional parameters
+        loop: true,
+        autoplay: {
+            delay: 5000,
+        },
+    });
+    </script>
+
+@endpush
+

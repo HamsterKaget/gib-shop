@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BootcampController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 
 Route::get('/dashboard', function () {
@@ -26,9 +27,18 @@ Route::get('/home',function () {
     return view('user.modules.home.index');
 })->name('home');
 
-Route::get('/program',function () {
-    return view('user.modules.program.index');
-})->name('program');
+Route::get('/bootcamp',function () {
+    return view('user.modules.bootcamp.index');
+})->name('bootcamp');
+
+Route::name('bootcamp.')->prefix('/bootcamp')->group(function() {
+    Route::get('/all', [BootcampController::class, 'index'])->name('all');
+    Route::get('/detail/{id}', [BootcampController::class, 'show'])->name('show');
+});
+
+Route::get('/mini-event',function () {
+    return view('user.modules.mini-event.index');
+})->name('mini-event');
 
 Route::get('/404',function () {
     return view('error.error');
