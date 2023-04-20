@@ -1,3 +1,4 @@
+
 @extends('user.layouts.app')
 
 @section('title', 'My Page Title')
@@ -111,8 +112,59 @@
         </div>
 
         <section class="bootcamp my-12">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="#" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <div class="p-4">
+                        <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
+                        <p class="text-gray-700 text-base">
+                            <span id="date" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-calendar-days mr-2"></i> 21 - 25 March 2023
+                            </span>
+                            <span id="time" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-clock mr-2"></i> 09.00 - 17.00
+                            </span>
+                            <span id="price" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-tag mr-2"></i> Rp. 150000
+                            </span>
+                        </p>
+                    </div>
+                </a>
+                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <div class="p-4">
+                        <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
+                        <p class="text-gray-700 text-base">
+                            <span id="date" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-calendar-days mr-2"></i> 21 - 25 March 2023
+                            </span>
+                            <span id="time" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-clock mr-2"></i> 09.00 - 17.00
+                            </span>
+                            <span id="price" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-tag mr-2"></i> Rp. 150000
+                            </span>
+                        </p>
+                    </div>
+                </a>
+                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <div class="p-4">
+                        <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
+                        <p class="text-gray-700 text-base">
+                            <span id="date" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-calendar-days mr-2"></i> 21 - 25 March 2023
+                            </span>
+                            <span id="time" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-clock mr-2"></i> 09.00 - 17.00
+                            </span>
+                            <span id="price" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-tag mr-2"></i> Rp. 150000
+                            </span>
+                        </p>
+                    </div>
+                </a>
+                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
                     <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
@@ -146,3 +198,5 @@
     </script>
 
 @endpush
+
+
