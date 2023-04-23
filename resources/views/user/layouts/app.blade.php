@@ -6,7 +6,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>@yield('title')</title>
         <!-- Tailwind CSS -->
-        {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}
         @vite('resources/css/app.css')
         <script src="https://kit.fontawesome.com/38ab242903.js" crossorigin="anonymous"></script>
         @stack('css')
@@ -21,9 +20,10 @@
         </main>
 
         <!-- Footer -->
+        @include('user.partials.footer')
 
         <!-- JavaScript -->
-        <script src="{{ mix('js/app.js') }}"></script>
+        {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
         @stack('js')
     </body>
 </html>

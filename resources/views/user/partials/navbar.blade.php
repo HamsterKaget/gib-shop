@@ -178,6 +178,9 @@
         </div>
     </div>
     <!-- Mobile -->
+    {{-- <div class="w-[90vw] container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
+    </div> --}}
+
     <nav class="mx-auto bg-white shadow">
         <div class="w-[90vw] container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
             <div class="h-full flex items-center">
