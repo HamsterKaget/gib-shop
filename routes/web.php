@@ -26,9 +26,12 @@ Route::get('/', function () {
 //     return view('admin.modules.home.index');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/home',function () {
-    return view('user.modules.home.index');
-})->name('home');
+// Route::get('/home',function () {
+//     return view('user.modules.home.index');
+// })->name('home');
+
+Route::get('/home', [BootcampController::class, 'home'])->name('home');
+
 
 // Route::get('/events',function () {
 //     return view('user.modules.bootcamp.index');

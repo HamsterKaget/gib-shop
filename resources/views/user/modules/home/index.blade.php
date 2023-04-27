@@ -102,86 +102,61 @@
         </div>
     </section>
 
+    {{-- <section class="bootcamp my-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach ($programs as $program)
+                <a href="events/detail/{{ $program->id }}" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                    <div class="p-4">
+                        <div class="font-bold text-xl mb-2 line-clamp-2">{{ $program->title }}</div>
+                        <p class="text-gray-700 text-base">
+                            <span id="date" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-calendar-days mr-2"></i> {{ date_format(date_create($program->start_date),"D, d M Y"); }}
+                            </span>
+                            <span id="time" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
+                            </span>
+                            <span id="price" class="block mb-1 text-sm">
+                                <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
+                            </span>
+                        </p>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </section> --}}
+
     <section id="bootcamp" class="p-8">
         <div class="container max-w-7xl mx-auto w-full h-full">
             <h2 class="text-2xl font-bold text-center text-neutral-500 mb-3">
-                Newest Bootcamp
+                Newest Events
             </h2>
             <hr>
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
-                    <div class="p-4">
-                        <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
-                        <p class="text-gray-700 text-base">
-                            <span id="date" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-calendar-days mr-2"></i> 21 - 25 March 2023
-                            </span>
-                            <span id="time" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-clock mr-2"></i> 09.00 - 17.00
-                            </span>
-                            <span id="price" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-tag mr-2"></i> Rp. 150000
-                            </span>
-                        </p>
-                    </div>
-                </a>
-                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
-                    <div class="p-4">
-                        <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
-                        <p class="text-gray-700 text-base">
-                            <span id="date" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-calendar-days mr-2"></i> 21 - 25 March 2023
-                            </span>
-                            <span id="time" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-clock mr-2"></i> 09.00 - 17.00
-                            </span>
-                            <span id="price" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-tag mr-2"></i> Rp. 150000
-                            </span>
-                        </p>
-                    </div>
-                </a>
-                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
-                    <div class="p-4">
-                        <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
-                        <p class="text-gray-700 text-base">
-                            <span id="date" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-calendar-days mr-2"></i> 21 - 25 March 2023
-                            </span>
-                            <span id="time" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-clock mr-2"></i> 09.00 - 17.00
-                            </span>
-                            <span id="price" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-tag mr-2"></i> Rp. 150000
-                            </span>
-                        </p>
-                    </div>
-                </a>
-                <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
-                    <div class="p-4">
-                        <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
-                        <p class="text-gray-700 text-base">
-                            <span id="date" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-calendar-days mr-2"></i> 21 - 25 March 2023
-                            </span>
-                            <span id="time" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-clock mr-2"></i> 09.00 - 17.00
-                            </span>
-                            <span id="price" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-tag mr-2"></i> Rp. 150000
-                            </span>
-                        </p>
-                    </div>
-                </a>
+                @foreach ($programs as $program)
+                    <a href="events/detail/{{ $program->id }}" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                        <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                        <div class="p-4">
+                            <div class="font-bold text-xl mb-2 line-clamp-2">{{ $program->title }}</div>
+                            <p class="text-gray-700 text-base">
+                                <span id="date" class="block mb-1 text-sm">
+                                    <i class="fa-solid fa-calendar-days mr-2"></i> {{ date_format(date_create($program->start_date),"D, d M Y"); }}
+                                </span>
+                                <span id="time" class="block mb-1 text-sm">
+                                    <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
+                                </span>
+                                <span id="price" class="block mb-1 text-sm">
+                                    <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
+                                </span>
+                            </p>
+                        </div>
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <section id="mini-event" class="p-8">
+    {{-- <section id="mini-event" class="p-8">
         <div class="container max-w-7xl mx-auto w-full h-full">
             <h2 class="text-2xl font-bold text-center text-neutral-500 mb-3">
                 Newest Mini Event
@@ -258,9 +233,9 @@
                 </a>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    <section id="testimoni" class="p-8">
+    {{-- <section id="testimoni" class="p-8">
         <div class="container max-w-7xl mx-auto w-full h-full">
             <h2 class="text-2xl font-bold text-center text-neutral-500 mb-5">
                 Testimoni
@@ -298,9 +273,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    <section id="testimoni" class="p-8">
+    <section id="faq" class="p-8">
         <div class="container max-w-7xl mx-auto w-full h-full">
             <div class="flex flex-col items-center">
                 <h2 class="font-bold text-5xl mt-5 tracking-tight">

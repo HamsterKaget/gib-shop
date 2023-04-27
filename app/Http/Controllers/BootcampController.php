@@ -11,7 +11,12 @@ class BootcampController extends Controller
         // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
         $programs = Program::with(['Option.Value', 'Image'])->get();
         return view('user.modules.bootcamp.index', compact('programs'));
-        // dd($programs[0]->image);
+    }
+
+    public function home() {
+        // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
+        $programs = Program::with(['Option.Value', 'Image'])->get();
+        return view('user.modules.home.index', compact('programs'));
     }
 
     public function all() {
