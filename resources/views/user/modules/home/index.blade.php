@@ -275,7 +275,7 @@
         </div>
     </section> --}}
 
-    <section id="faq" class="p-8">
+    {{-- <section id="faq" class="p-8">
         <div class="container max-w-7xl mx-auto w-full h-full">
             <div class="flex flex-col items-center">
                 <h2 class="font-bold text-5xl mt-5 tracking-tight">
@@ -317,7 +317,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection
 
 @push('js')
