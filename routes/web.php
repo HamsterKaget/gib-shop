@@ -58,6 +58,8 @@ Route::middleware('auth')->group(function () {
 
 // Route Dashboard Admin
 Route::name('dashboard.')->prefix('/dashboard')->group(function() {
+    Route::get('/', [ManageUserController::class, 'home'])->name('index');
+
 
     Route::name('manage-user.')->prefix('/manage-user')->group(function() {
         Route::get('/', [ManageUserController::class, 'index'])->name('index');

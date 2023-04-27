@@ -13,7 +13,7 @@
                     </div>
                     <div class="mt-4 mx-2 md:mt-0">
                         <h1 class="text-2xl md:text-3xl font-bold">{{ $program->title }}</h1>
-                        <div class="mt-4 md:mt-8 w-full md:w-1/2 rounded-lg bg-slate-50 shadow-lg p-4">
+                        <div class="mt-4 md:mt-8 w-full md:w-8/12 rounded-lg bg-slate-50 shadow-lg p-4">
                             <h5 class="font-bold text-lg mb-2">Detail Information</h5>
                             <p><i class="fa-solid fa-cube m-1"></i> Stock : {{ $program->stock }}</p>
                             <p class="mt-1"><i class="fa-solid fa-calendar m-1"></i> Start Date : {{date_format(date_create($program->start_date),"D, d M Y"); }}</p>

@@ -209,14 +209,14 @@
                             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
                                 <a
-                                    href="#"
+                                    href="{{ route('dashboard.manage-event.index') }}"
                                     role="menuitem"
                                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
                                 >
                                     Manage Event
                                 </a>
                                 <a
-                                    href="#"
+                                    href="{{ route('dashboard.manage-event.index') }}"
                                     role="menuitem"
                                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
                                 >
@@ -356,7 +356,7 @@
                             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
                                 <a
-                                    href="#"
+                                    href="{{ route('dashboard.manage-user.index') }}"
                                     role="menuitem"
                                     class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
                                 >

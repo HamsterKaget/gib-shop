@@ -16,6 +16,10 @@ class ManageUserController extends Controller
         $this->middleware('admin');
     }
 
+    public function home(Request $request) {
+        return view('admin.modules.home.index');
+    }
+
     public function index(Request $request) {
         $where = [];
         if($request->search) {

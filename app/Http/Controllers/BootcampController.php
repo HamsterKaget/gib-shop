@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class BootcampController extends Controller
 {
+
     public function index() {
         // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
         $programs = Program::with(['Option.Value', 'Image'])->get();

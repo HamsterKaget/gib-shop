@@ -17,7 +17,8 @@ class CheckAdminRole
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user() && !Auth::user()->hasRole('admin')) {
-            return redirect(route('home'));
+            // return redirect(route('home'));
+            abort(403);
         }
 
         return $next($request);
