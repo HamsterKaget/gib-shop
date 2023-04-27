@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BootcampController;
+use App\Http\Controllers\ManageEventController;
+use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,19 +21,21 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.modules.home.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/dashboard', function () {
+//     return view('admin.modules.home.index');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home',function () {
     return view('user.modules.home.index');
 })->name('home');
 
-Route::get('/bootcamp',function () {
-    return view('user.modules.bootcamp.index');
-})->name('bootcamp');
+// Route::get('/events',function () {
+//     return view('user.modules.bootcamp.index');
+// })->name('events');
 
-Route::name('bootcamp.')->prefix('/bootcamp')->group(function() {
+Route::name('events.')->prefix('/events')->group(function() {
+    Route::get('/', [BootcampController::class, 'index'])->name('index');
     Route::get('/all', [BootcampController::class, 'index'])->name('all');
     Route::get('/detail/{id}', [BootcampController::class, 'show'])->name('show');
 });
@@ -48,5 +52,24 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Route Dashboard Admin
+Route::name('dashboard.')->prefix('/dashboard')->group(function() {
+
+    Route::name('manage-user.')->prefix('/manage-user')->group(function() {
+        Route::get('/', [ManageUserController::class, 'index'])->name('index');
+        Route::post('/', [ManageUserController::class, 'store'])->name('store');
+        Route::put('/', [ManageUserController::class, 'update'])->name('update');
+        Route::delete('/', [ManageUserController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::name('manage-event.')->prefix('/manage-event')->group(function() {
+        Route::get('/', [ManageEventController::class, 'index'])->name('index');
+        Route::post('/', [ManageEventController::class, 'store'])->name('store');
+        Route::put('/', [ManageEventController::class, 'update'])->name('update');
+        Route::delete('/', [ManageEventController::class, 'destroy'])->name('destroy');
+    });
+
+})->middleware(['auth', 'admin']);
 
 require __DIR__.'/auth.php';

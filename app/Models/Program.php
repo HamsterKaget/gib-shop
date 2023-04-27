@@ -22,6 +22,7 @@ class Program extends Model
         "end_date",
         "location",
         "time",
+        "stock",
         "price",
     ];
 

@@ -110,7 +110,7 @@
             <hr>
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
@@ -127,7 +127,7 @@
                     </div>
                 </a>
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
@@ -144,7 +144,7 @@
                     </div>
                 </a>
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
@@ -161,7 +161,7 @@
                     </div>
                 </a>
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
@@ -189,7 +189,7 @@
             <hr>
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
@@ -206,7 +206,7 @@
                     </div>
                 </a>
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
@@ -223,7 +223,7 @@
                     </div>
                 </a>
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
@@ -240,7 +240,7 @@
                     </div>
                 </a>
                 <a href="bootcamp/detail/1" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset('images/public.avif') }}" alt="Card Image">
+                    <img class="h-54 w-full object-cover" src="{{ asset('images/Thumbnail.png') }}" alt="Card Image">
                     <div class="p-4">
                         <div class="font-bold text-xl mb-2 line-clamp-2">DIGITAL MARKETING: FULLSTACK INTENSIVE BOOTCAMP</div>
                         <p class="text-gray-700 text-base">
