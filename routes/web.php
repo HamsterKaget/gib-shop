@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BootcampController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ManageEventController;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
@@ -54,12 +55,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{program_id}', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+    // Route::get('/cart/store', [CartController::class, 'store'])->name('cart.store');
+    // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
 });
 
-// Route Dashboard Admin
-Route::name('dashboard.')->prefix('/dashboard')->group(function() {
-    Route::get('/', [ManageUserController::class, 'home'])->name('index');
 
+// Route Dashboard Admin
+Route::middleware(['auth', 'admin'])->name('dashboard.')->prefix('/dashboard')->group(function() {
+    Route::get('/', [ManageUserController::class, 'home'])->name('index');
 
     Route::name('manage-user.')->prefix('/manage-user')->group(function() {
         Route::get('/', [ManageUserController::class, 'index'])->name('index');
@@ -75,6 +84,6 @@ Route::name('dashboard.')->prefix('/dashboard')->group(function() {
         Route::delete('/', [ManageEventController::class, 'destroy'])->name('destroy');
     });
 
-})->middleware(['auth', 'admin']);
+});
 
 require __DIR__.'/auth.php';

@@ -143,6 +143,15 @@
                                 </div>
                                 <input class="focus:outline-none rounded w-full text-sm text-gray-500 placeholder-gray-600 bg-gray-100 pl-10 py-2" type="text" placeholder="Search" />
                             </div>
+                            <!-- component -->
+                            <div class="relative py-2">
+                                <div class="t-0 absolute left-3">
+                                    <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">3</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: mt-4 h-6 w-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                </svg>
+                            </div>
                         </div>
                         <div class="border-t border-gray-300">
                             <div class="w-full flex items-center justify-between px-6 pt-1">
@@ -182,7 +191,7 @@
     </div> --}}
 
     <nav class="mx-auto bg-white shadow">
-        <div class="w-[90vw] container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
+        <div class="max-w-screen w-[90vw] container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
             <div class="h-full flex items-center">
                 <div aria-label="Home" role="img" class="mr-10 flex items-center">
                     {{-- <svg  id="logo" enable-background="new 0 0 300 300" height="44" viewBox="0 0 300 300" width="43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -215,8 +224,8 @@
                         </div>
                     @endguest
                     @auth()
-                        <div class="w-full pr-12 h-full flex items-center border-r">
-                            <div class="relative w-full">
+                        <div class="w-full h-full flex items-center border-r pr-8">
+                            {{-- <div class="relative w-full mr-3">
                                 <div class="text-gray-600 absolute ml-3 inset-0 m-auto w-4 h-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -225,9 +234,34 @@
                                     </svg>
                                 </div>
                                 <input class="border border-gray-100 focus:outline-none focus:border-indigo-700 w-56 rounded text-sm text-gray-500 placeholder-gray-600 bg-gray-100 pl-8 py-2" type="text" placeholder="Search" />
+                            </div> --}}
+                            <!-- component -->
+                            @php
+                                $carts = Auth::user()->carts;
+                                $totalItems = 0;
+                                foreach ($carts as $cart) {
+                                    foreach ($cart->Details as $detail) {
+                                        $totalItems += $detail->quantity;
+                                        foreach ($detail->Options as $option) {
+                                            $totalItems += $option->quantity;
+                                        }
+                                    }
+                                }
+                            @endphp
+
+                            <div class="relative py-2">
+                                <a href="{{ route('cart.index') }}">
+                                    <div class="t-0 absolute left-3">
+                                        <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">{{ $totalItems }}</p>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: mt-4 h-6 w-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                    </svg>
+                                </a>
                             </div>
+
                         </div>
-                        <div class="w-full h-full flex ml-8">
+                        <div class="w-full h-full flex min-w-fit mx-8">
                             {{-- <div class="w-32 h-full flex items-center justify-center border-r cursor-pointer text-gray-600"> --}}
                                 {{-- <a aria-label="show notifications" role="link" href="javascript:void(0)" class="cursor-pointer w-6 h-6 xl:w-auto xl:h-auto text-gray-600">
                                     <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -237,12 +271,12 @@
                                     </svg>
                                 </a> --}}
                             {{-- </div> --}}
-                            <div aria-haspopup="true" class="cursor-pointer w-full flex items-center justify-end relative" onclick="dropdownHandler(this)">
+                            <div aria-haspopup="true" class="cursor-pointer w-full flex items-center justify-start relative" onclick="dropdownHandler(this)">
                                 <button aria-haspopup="true" onclick="dropdownHandler(this)" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 rounded flex items-center" >
-                                    <img class="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" />
-                                    <p class="text-gray-800 text-sm ml-2">Hi, {{ Auth::user()->name }}</p>
+                                    {{-- <img class="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" /> --}}
+                                    <p class="text-gray-800 text-sm">Hi, {{ Auth::user()->name }}</p>
                                 </button>
-                                <ul class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-64 hidden">
+                                <ul class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-56 hidden">
                                     {{-- <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                         <div class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
