@@ -86,9 +86,9 @@
                                         <a href="{{ route('login') }}" class="block text-center bg-emerald-500 hover:bg-emerald-600 hover:-translate-y-1 transition-all duration-300 text-slate-50 py-2 px-3 w-full mt-4 shadow-lg rounded-lg">Login to Continue</a>
                                     @endguest
                                     @auth
-                                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 hover:-translate-y-1 transition-all duration-300 text-slate-50 py-2 px-3 w-full mt-4 shadow-lg rounded-lg">
-                                            <i class="fa-solid fa-cart-shopping"></i> Add to cart
-                                        </button>
+                                            <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 hover:-translate-y-1 transition-all duration-300 text-slate-50 py-2 px-3 w-full mt-4 shadow-lg rounded-lg">
+                                                <i class="fa-solid fa-cart-shopping"></i> Add to cart
+                                            </button>
                                     @endauth
                                 </form>
 

@@ -4,7 +4,8 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {{-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>@yield('title')</title>
         <!-- Tailwind CSS -->
@@ -159,6 +160,27 @@
                                 >
                                     Home
                                 </a>
+                                <a
+                                    href="#"
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                                >
+                                    Manage Discount
+                                </a>
+                                <a
+                                    href="#"
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                                >
+                                    Manage Transaction
+                                </a>
+                                <a
+                                    href="#"
+                                    role="menuitem"
+                                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                                >
+                                    Manage Ticket
+                                </a>
                             </div>
                         </div>
 
@@ -211,7 +233,7 @@
                                 <a
                                     href="{{ route('dashboard.manage-event.index') }}"
                                     role="menuitem"
-                                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700 {{ Route::currentRouteName() === 'dashboard.manage-event.index' ? 'text-gray-700 dark:text-light' : '' }}"
                                 >
                                     Manage Event
                                 </a>
