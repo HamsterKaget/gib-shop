@@ -35,6 +35,7 @@
                                 <hr>
                                 <div class="my-4"></div>
                                 <form action="{{ route('cart.add', $program->id) }}" method="POST">
+                                    @csrf
                                     <input type="hidden" name="program_id" value="{{ $program->id }}">
                                     @foreach ($program->Option as $option)
                                         <label for="option_value_id_{{ $option->id }}" class="block my-2 mx-2 text-sm font-medium text-gray-900">
@@ -43,9 +44,11 @@
                                         <input type="hidden" name="options[{{ $option->id }}][id]" value="{{ $option->id }}">
                                         <select required name="options[{{ $option->id }}][value_id]" id="option_value_id_{{ $option->id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
                                             <option value="" selected>Choose an option</option>
-                                            @foreach ($option->values as $value)
-                                                <option value="{{ $value->id }}">{{ $value->value }}</option>
-                                            @endforeach
+                                            @if ($option->Value->isNotEmpty())
+                                                @foreach ($option->Value as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->value }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     @endforeach
                                     @guest
