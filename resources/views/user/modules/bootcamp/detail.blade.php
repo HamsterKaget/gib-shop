@@ -45,8 +45,8 @@
                                         <input type="hidden" name="option_id" value="{{ $option->id }}">
                                         {{-- display and get selected value id for the option values --}}
                                         {{-- <select name="option_value_id" id="option_value_id"> --}}
-                                        <select name="option_value_id" id="option_value_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
-                                            <option selected>Choose an option</option>
+                                        <select  aria-placeholder="Choose an Option"  name="option_value_id" id="option_value_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
+                                            {{-- <option>Choose an option</option> --}}
                                             @if ($option->Value->isNotEmpty())
                                                 @foreach ($option->Value as $value)
                                                     <option value="{{ $value->id }}">{{ $value->value }}</option>
