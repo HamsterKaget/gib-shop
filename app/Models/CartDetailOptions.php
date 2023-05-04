@@ -32,6 +32,6 @@ class CartDetailOptions extends Model
 
     public function OptionValue()
     {
-        return $this->belongsTo(OptionValue::class, 'option_value_id');
+        return $this->belongsTo(ProgramOptionValue::class, 'option_value_id');
     }
 }
