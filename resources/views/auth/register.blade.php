@@ -248,12 +248,8 @@
                 <div class="bg-overlay"></div>
                 <div class="absolute bg-gradient-to-b from-indigo-600 to-blue-500 opacity-75 inset-0 z-0"></div>
                     <div class="w-full  max-w-md z-10">
-                        <div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">Reference site about Lorem Ipsum..</div>
-                        <div class="sm:text-sm xl:text-md text-gray-200 font-normal"> What is Lorem Ipsum Lorem Ipsum is simply dummy
-                            text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever
-                            since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it
-                            has?
-                        </div>
+                        <div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">Welcome to GatheringInBali</div>
+                        <div class="sm:text-sm xl:text-md text-gray-200 font-normal">Welcome to our registration page! We're thrilled that you've chosen to join our community. Please fill in the required fields below to create your account and start your journey with us. If you have any questions or concerns, please don't hesitate to contact our support team. We look forward to seeing you soon!</div>
                     </div>
                     <!---remove custom style-->
                     <ul class="circles">
