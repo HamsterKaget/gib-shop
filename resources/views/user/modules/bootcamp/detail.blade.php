@@ -49,7 +49,7 @@
                                             <option selected>Choose an option</option>
                                             @if ($option->Value->isNotEmpty())
                                                 @foreach ($option->Value as $value)
-                                                    <option value="{{ $value->id }}">{{ $value->value }}e</option>
+                                                    <option value="{{ $value->id }}">{{ $value->value }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
