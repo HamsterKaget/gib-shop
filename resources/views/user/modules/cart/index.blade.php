@@ -33,7 +33,7 @@
                             </div>
                             @foreach($detail->Options as $option)
                             <div class="flex items-center">
-                                <span class="font-bold text-gray-700 mr-2">{{ $option->ProgramOption->name }}:</span>
+                                <span class="font-bold text-gray-700 mr-2">{{ $option->ProgramOption->options }}:</span>
                                 <span>{{ $option->OptionValue->value }}</span>
                             </div>
                             @endforeach
@@ -43,7 +43,7 @@
                                 @php
                                     $total += $detail->Program->price * $detail->quantity;
                                 @endphp
-                                <span>{{ $detail->Program->price * $detail->quantity }} USD</span>
+                                <span>Rp {{ $detail->Program->price * $detail->quantity }}</span>
                             </div>
                         </div>
                         <div class="flex flex-col">
@@ -62,7 +62,7 @@
         <div class="flex justify-between items-start mt-8">
             <span class="font-bold text-lg">Total:</span>
             <div class="flex flex-col space-y-2">
-                <span class="font-bold text-lg">{{ $total }} USD</span>
+                <span class="font-bold text-lg">Rp {{ $total }}</span>
                 <form action="{{ route('checkout')}}" method="POST">
                     @csrf
                     <input type="hidden" name="cart_id" value="{{ $cart->id }}">
