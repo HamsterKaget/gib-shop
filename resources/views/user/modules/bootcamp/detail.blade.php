@@ -1,15 +1,73 @@
 @extends('user.layouts.app')
 
+@push('css')
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+/>
+<style>
+
+</style>
+@endpush
+
+{{-- @dd($program) --}}
 @section('content')
-    <div class="min-h-screen mx-auto w-screen h-full">
+    <div class="min-h-screen mx-auto max-w-screen h-full">
         <div class="grid grid-cols-1">
-            <div class=" bg-sky-100 py-8">
+            <div class="bg-sky-100 py-8">
                 <div class="md:flex max-w-[90vw] mx-auto">
                     <div class="mx-2 md:mx-4 lg:mx-8 md:w-4/10">
-                        @if($program->thumbnail)
-                                <img class="max-h-96 rounded-lg"
-                                    src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
-                        @endif
+                        <div class="swiper mySwiper2" style="max-width: 500px;">
+                            <div class="swiper-wrapper">
+                                @if($program->thumbnail)
+                                <div class="swiper-slide">
+                                    <img class="max-h-96 rounded-lg mx-auto" src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
+                                </div>
+                                @endif
+                                @if ($program->Image->isNotEmpty())
+                                    @foreach($program->Image as $image)
+                                    <div class="swiper-slide">
+                                        <img class="max-h-96 rounded-lg mx-auto" src="{{ asset($image->image) }}" alt="{{ $program->title }}">
+                                    </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                        <div thumbsSlider="" class="swiper mySwiper" style="max-width: 500px; margin-top: 15px;">
+                            <div class="swiper-wrapper">
+                                @if($program->thumbnail)
+                                <div class="swiper-slide">
+                                    <img class="max-h-24 rounded-lg" src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
+                                </div>
+                                @endif
+                                @if ($program->Image->isNotEmpty())
+                                @foreach($program->Image as $image)
+                                <div class="swiper-slide">
+                                    <img class="max-h-24 rounded-lg" src="{{ asset($image->image) }}" alt="{{ $program->title }}">
+                                </div>
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        {{-- <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                @if($program->thumbnail)
+                                <div class="swiper-slide">
+                                    <img class="max-h-96 rounded-lg" src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
+                                </div>
+                                @endif
+                                @if ($program->Image->isNotEmpty())
+                                @foreach($program->Image as $image)
+                                <div class="swiper-slide">
+                                    <img class="max-h-96 rounded-lg" src="{{ asset($image->image) }}" alt="{{ $program->title }}">
+                                </div>
+                                @endforeach
+                                @endif
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div> --}}
                     </div>
                     <div class="mt-4 mx-2 md:mt-0">
                         <h1 class="text-2xl md:text-3xl font-bold">{{ $program->title }}</h1>
@@ -22,7 +80,7 @@
                             <p class="mt-1"><i class="fa-solid fa-tags m-1"></i> Price : Rp {{ number_format($program->price) }}</p>
                         </div>
 
-                        {{-- <button class="bg-indigo-500 hover:bg-indigo-600 text-slate-50 font-bold py-3 px-4 mt-4 shadow-lg rounded-lg">Join Bootcamp Now !</button> --}}
+                            {{-- <button class="bg-indigo-500 hover:bg-indigo-600 text-slate-50 font-bold py-3 px-4 mt-4 shadow-lg rounded-lg">Join Bootcamp Now !</button> --}}
                     </div>
                 </div>
             </div>
@@ -105,17 +163,34 @@
     </div>
 @endsection
 
-@section('scripts')
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-    var mySwiper = new Swiper('.swiper-container', {
-        autoplay: {
-            delay: 5000,
+@push('js')
+<!-- Swiper JS -->
+{{-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+{{-- <script>
+    var swiper = new Swiper(".mySwiper", {
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
         },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
+    });
+</script> --}}
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 5,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+    });
+    var swiper2 = new Swiper(".mySwiper2", {
+        spaceBetween: 5,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        thumbs: {
+            swiper: swiper,
         },
     });
 </script>
-@endsection
+@endpush

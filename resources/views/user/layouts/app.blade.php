@@ -8,8 +8,8 @@
         <title>@yield('title')</title>
         <!-- Tailwind CSS -->
         @vite('resources/css/app.css')
-        <script src="https://kit.fontawesome.com/38ab242903.js" crossorigin="anonymous"></script>
         @stack('css')
+        <script src="https://kit.fontawesome.com/38ab242903.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-gray-100 font-sans leading-normal tracking-normal">
         {{-- navbar --}}
