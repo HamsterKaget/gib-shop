@@ -34,24 +34,18 @@
                                 <h5 class="font-bold text-lg mb-2 text-center uppercase">Choose Variant</h5>
                                 <hr>
                                 <div class="my-4"></div>
-                                <form action="" method="post">
-                                    @csrf
+                                <form action="{{ route('cart.add', $program->id) }}" method="POST">
                                     <input type="hidden" name="program_id" value="{{ $program->id }}">
                                     @foreach ($program->Option as $option)
-                                        {{-- display the name of the option --}}
-                                        <label for="option_value_id" class="block my-2 mx-2 text-sm font-medium text-gray-900">Select an {{ $option->options }}</label>
-                                        {{-- <label for="option_value_id" class="text-slate-800 font-bold d-block">{{ $option->options }}</label> --}}
-                                        {{-- save the option id --}}
-                                        <input type="hidden" name="option_id" value="{{ $option->id }}">
-                                        {{-- display and get selected value id for the option values --}}
-                                        {{-- <select name="option_value_id" id="option_value_id"> --}}
-                                        <select required name="option_value_id" id="option_value_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
-                                            <option selected disabled value="">Choose an option</option>
-                                            @if ($option->Value->isNotEmpty())
-                                                @foreach ($option->Value as $value)
-                                                    <option value="{{ $value->id }}">{{ $value->value }}</option>
-                                                @endforeach
-                                            @endif
+                                        <label for="option_value_id_{{ $option->id }}" class="block my-2 mx-2 text-sm font-medium text-gray-900">
+                                            Select an {{ $option->name }}
+                                        </label>
+                                        <input type="hidden" name="options[{{ $option->id }}][id]" value="{{ $option->id }}">
+                                        <select required name="options[{{ $option->id }}][value_id]" id="option_value_id_{{ $option->id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
+                                            <option value="" selected>Choose an option</option>
+                                            @foreach ($option->values as $value)
+                                                <option value="{{ $value->id }}">{{ $value->value }}</option>
+                                            @endforeach
                                         </select>
                                     @endforeach
                                     @guest
