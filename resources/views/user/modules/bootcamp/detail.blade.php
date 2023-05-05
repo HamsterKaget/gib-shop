@@ -13,10 +13,10 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
 {{-- @dd($program) --}}
 @section('content')
     <div class="min-h-screen bg-sky-100 mx-auto h-full">
-        <div class="grid max-w-[1980px] overflow-x-hidden grid-cols-1 lg:grid-cols-2">
+        <div class="grid max-w-[1980px] overflow-x-hidden -space-x-3 grid-cols-1 lg:grid-cols-2">
             <div class="py-8">
-                <div class="md:flex max-w-[90vw] mx-auto">
-                    <div class="mx-2 md:mx-4 lg:mx-8 md:w-4/10">
+                <div class="md:flex mx-auto" style="width: 650px;">
+                    <div class="md:w-4/10">
                         <div class="swiper mySwiper2" style="max-width: 650px;">
                             <div class="swiper-wrapper">
                                 @if($program->thumbnail)
