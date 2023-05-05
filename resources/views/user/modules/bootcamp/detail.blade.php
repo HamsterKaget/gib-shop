@@ -74,9 +74,9 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
             <div class="py-4 mb-12">
                 <div class="md:grid max-w-[90vw] mx-auto grid-cols-1">
                     <div class="mt-4 mx-2 md:mt-0">
-                        <h1 class="text-2xl md:text-3xl font-bold">{{ $program->title }}</h1>
-                        <div class="mt-4 md:mt-8 w-9/12 rounded-lg bg-slate-50 shadow-lg p-4">
-                            <h5 class="font-bold text-lg mb-2">Detail Information</h5>
+                        <h1 class="text-2xl md:text-3xl font-bold text-center lg:text-left">{{ $program->title }}</h1>
+                        <div class="mt-4 md:mt-8 w-full lg:w-9/12 rounded-lg bg-slate-50 shadow-lg p-4">
+                            <h5 class="font-bold text-lg  text-center lg:text-left mb-2">Detail Information</h5>
                             <p><i class="fa-solid fa-cube m-1"></i> Stock : {{ $program->stock }}</p>
                             <p class="mt-1"><i class="fa-solid fa-calendar m-1"></i> Start Date : {{date_format(date_create($program->start_date),"D, d M Y"); }}</p>
                             <p class="mt-1"><i class="fa-solid fa-calendar m-1"></i> End Date : {{date_format(date_create($program->end_date),"D, d M Y"); }}</p>
@@ -84,7 +84,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                             <p class="mt-1"><i class="fa-solid fa-tags m-1"></i> Price : Rp {{ number_format($program->price) }}</p>
                         </div>
 
-                        <div class="w-9/12">
+                        <div class="w-full lg:w-9/12">
                             @if ($program->Option->isNotEmpty())
                                 <div class="mt-4 md:mt-8 w-full rounded-lg bg-slate-50 shadow-lg p-4">
                                     <h5 class="font-bold text-lg mb-2 text-center uppercase">Choose Variant</h5>
@@ -152,9 +152,11 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                             {{-- <button class="bg-indigo-500 hover:bg-indigo-600 text-slate-50 font-bold py-3 px-4 mt-4 shadow-lg rounded-lg">Join Bootcamp Now !</button> --}}
                     </div>
 
+                    <hr>
+
                     <div class="mt-4 mx-2 md:mt-0 w-full">
                         <div class="title">
-                            <h5 class="font-bold text-slate-800 text-xl my-4">Description</h5>
+                            <h5 class="font-bold text-slate-800 text-xl text-center lg:text-left my-4">Description</h5>
                         </div>
                         <div class="lg:pr-8">
                             {!! $program->description !!}
