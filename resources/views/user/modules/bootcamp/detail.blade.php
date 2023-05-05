@@ -12,8 +12,8 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
 
 {{-- @dd($program) --}}
 @section('content')
-    <div class="min-h-screen mx-auto max-w-screen h-full">
-        <div class="bg-sky-100 grid grid-cols-1 lg:grid-cols-2">
+    <div class="min-h-screen bg-sky-100 mx-auto h-full">
+        <div class="grid max-w-[1980px] overflow-x-hidden grid-cols-1 lg:grid-cols-2">
             <div class="py-8">
                 <div class="md:flex max-w-[90vw] mx-auto">
                     <div class="mx-2 md:mx-4 lg:mx-8 md:w-4/10">
@@ -156,7 +156,9 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                         <div class="title">
                             <h5 class="font-bold text-slate-800 text-xl my-4">Description</h5>
                         </div>
-                        {!! $program->description !!}
+                        <div class="lg:pr-8">
+                            {!! $program->description !!}
+                        </div>
                     </div>
                 </div>
             </div>
