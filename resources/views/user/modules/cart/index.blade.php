@@ -63,11 +63,12 @@
             <span class="font-bold text-lg">Total:</span>
             <div class="flex flex-col space-y-2">
                 <span class="font-bold text-lg">Rp {{ $total }}</span>
-                <form action="{{ route('checkout')}}" method="POST">
+                <a href="{{route('checkout.index')}}" class="bg-green-500 text-white hover:bg-green-700 py-2 px-4 rounded-lg shadow-lg text-sm text-center">Checkout</a>
+                {{-- <form action="{{ route('checkout.index')}}" method="POST">
                     @csrf
                     <input type="hidden" name="cart_id" value="{{ $cart->id }}">
                     <button class="bg-green-500 text-white hover:bg-green-700 py-2 px-4 rounded-lg shadow-lg text-sm">Checkout</button>
-                </form>
+                </form> --}}
             </div>
         </div>
         @else

@@ -10,28 +10,34 @@ use App\Models\OrderDetailOption;
 use App\Models\OrderDetailOptions;
 use App\Models\OrderDetails;
 use App\Models\Orders;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use PSpell\Config;
 
 class OrdersController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+        $cart = Cart::where('user_id', Auth::id())->with('Details.Program', 'Details.Options.OptionValue')->first();
 
+        return view('user.modules.checkout.index', compact('cart'));
     }
 
     public function checkout(Request $request) {
         $request->validate([
-            'cart_id' => 'required|exists:cart,id'
+            'cart_id' => 'required|exists:cart,id',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'backup_email' => 'nullable',
+            'address' => 'nullable',
         ]);
 
-        \Midtrans\Config::$serverKey = config('midtrans.server_key');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-
         $cart = Cart::with(['Details.Options', 'User'])->findOrFail($request->cart_id);
+
+        // Generate the UUID
+        $timestamp = round(microtime(true) * 1000);
+        $lastOrderId= DB::table('orders')->latest('id')->value('id');
+        $uuid = $timestamp."-".Auth::user()->id."-".++$lastOrderId;
 
         // Get the program details from the cart details
         $programDetails = $cart->Details()->get();
@@ -45,6 +51,11 @@ class OrdersController extends Controller
          // Create an order record
         $order = Orders::create([
             'user_id' => $cart->user_id,
+            'uuid' => $uuid,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'backup_email' => $request->backup_email,
+            'address' => $request->address,
             'status' => 'pending',
             'total_amount_paid' => $totalAmount,
         ]);
@@ -82,10 +93,18 @@ class OrdersController extends Controller
             ),
         );
 
+        // $cart = Cart::where('user_id', Auth::id())->with('Details.Program', 'Details.Options.OptionValue')->first();
 
         // Get the Snap Token
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('user.modules.checkout.index', compact('snapToken', 'order'));
+        return view('user.modules.checkout.index', compact('snapToken', 'order', 'cart'));
         // dd($snapToken);
 
     }

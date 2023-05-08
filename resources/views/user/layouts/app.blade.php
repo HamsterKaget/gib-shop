@@ -15,7 +15,7 @@
         {{-- navbar --}}
         @include('user.partials.navbar')
         <!-- Page Content -->
-        <main class="min-h-screen">
+        <main class="min-h-screen pt-16">
             @yield('content')
         </main>
 
