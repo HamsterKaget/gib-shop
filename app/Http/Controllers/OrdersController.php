@@ -10,6 +10,8 @@ use App\Models\OrderDetailOption;
 use App\Models\OrderDetailOptions;
 use App\Models\OrderDetails;
 use App\Models\Orders;
+use App\Models\Program;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -41,6 +43,7 @@ class OrdersController extends Controller
 
         // Get the program details from the cart details
         $programDetails = $cart->Details()->get();
+        // dd($request);
 
         // Calculate the total amount to be paid
         $totalAmount = 0;
@@ -77,6 +80,9 @@ class OrdersController extends Controller
                     'quantity' => $cartOption->quantity,
                 ]);
             }
+            $program->stock -= 1;
+            $program->save();
+            // dd($program);
         }
 
         // Use the created order ID in the transaction details parameter
@@ -93,7 +99,6 @@ class OrdersController extends Controller
             ),
         );
 
-        // $cart = Cart::where('user_id', Auth::id())->with('Details.Program', 'Details.Options.OptionValue')->first();
 
         // Get the Snap Token
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
@@ -104,7 +109,13 @@ class OrdersController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('user.modules.checkout.index', compact('snapToken', 'order', 'cart'));
+
+        // set column snaptoken in Orders model wheere id = $order->id
+        $order->update(['snaptoken' => $snapToken]);
+        $cart->delete();
+
+        // return view('user.modules.checkout.index', compact('snapToken', 'order', 'cart'));
+        return redirect()->to(route('user-dashboard.transaction'));
         // dd($snapToken);
 
     }
@@ -170,6 +181,7 @@ class OrdersController extends Controller
 
     public function callback(Request $request)
     {
+
         $signatureKey = config('midtrans.server_key');
         $orderId = $request->order_id;
         $statusCode = $request->status_code;
@@ -185,13 +197,28 @@ class OrdersController extends Controller
             abort(400, 'Invalid signature');
         }
 
+
         // Process the transaction based on the status code
         if ($statusCode == '200') {
             // TODO: update the order status and other relevant information
-            $order = Orders::where('id', $orderId)->first();
+            $order = Orders::with(["orderDetails.orderDetailOptions.optionValue.Option", "orderDetails.program"])->where('id', $orderId)->first();
 
             if($request->status_code == 200) {
                 $order->status = "Success";
+
+                $i = 1;
+                foreach($order->orderDetails as $program) {
+                    // dd($order);
+                    $p = Program::find($program->program_id);
+                    $uuid = $program->program_id . $order->id. $order->user_id . $p->stock += $i++;
+                    $ticket = Ticket::create([
+                        "ticket_uuid" => $uuid,
+                        "program_id" => $program->program_id,
+                        "order_id" => $order->id,
+                        "user_id" => $order->user_id,
+                    ]);
+
+                }
             } else if ($request->status_code == 201) {
                 $order->status = "Pending";
             } else if ($request->status_code == 202) {
@@ -200,7 +227,6 @@ class OrdersController extends Controller
                 $order->status = "Error / Unpaid";
             }
 
-
             $order->save();
             return response('Payment success',200);
         } else {
@@ -208,7 +234,8 @@ class OrdersController extends Controller
             // TODO: update the order status and other relevant information
             $order = Orders::where('id', $orderId)->first();
 
-            $order->status = $request->status;
+            // $order->status = $request->status;
+            $order->status = "Failed";
             $order->save();
             return response('Payment failed', 200);
         }

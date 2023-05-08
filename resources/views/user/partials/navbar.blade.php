@@ -297,7 +297,7 @@
                                     {{-- <img class="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="avatar" /> --}}
                                     <p class="text-gray-800 text-sm">Hi, {{ Auth::user()->name }}</p>
                                 </button>
-                                <ul class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-56 hidden">
+                                <ul class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-44 hidden">
                                     {{-- <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                         <div class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -323,7 +323,7 @@
                                             <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                             <circle cx="12" cy="12" r="3" />
                                         </svg>
-                                        <a href="javascript:void(0)" class="ml-2">Account Settings</a>
+                                        <a href="{{ route('user-dashboard.home') }}" class="ml-2">Account Settings</a>
                                     </li>
                                     <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
                                         <form method="POST" action="{{ route('logout') }}">

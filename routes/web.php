@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BootcampController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ManageEventController;
 use App\Http\Controllers\ManageUserController;
@@ -67,10 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [OrdersController::class, 'index'])->name('checkout.index');
     Route::post('/checkout/pay', [OrdersController::class, 'checkout'])->name('checkout.pay');
     // Route::get('/cart/store', [CartController::class, 'store'])->name('cart.store');
-    // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
+    Route::name('user-dashboard.')->prefix('/user-dashboard')->group(function() {
+        Route::get('/home', [DashboardController::class, 'home'])->name('home');
+        Route::get('/transaction', [DashboardController::class, 'transaction'])->name('transaction');
+        Route::get('/ticket', [DashboardController::class, 'ticket'])->name('ticket');
+        Route::get('/ticket/view', [DashboardController::class, 'ticketDetail'])->name('ticket.view');
+    });
 });
-
 
 // Route Dashboard Admin
 Route::middleware(['auth', 'admin'])->name('dashboard.')->prefix('/dashboard')->group(function() {
