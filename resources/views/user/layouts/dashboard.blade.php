@@ -250,7 +250,7 @@
                     <!-- Desktop Right buttons -->
                     <nav aria-label="Secondary" class="hidden space-x-2 md:flex md:items-center">
                         <!-- Toggle dark theme button -->
-                        {{-- <button aria-hidden="true" class="relative focus:outline-none" x-cloak @click="toggleTheme">
+                        <button aria-hidden="true" class="relative focus:outline-none" x-cloak @click="toggleTheme">
                         <div
                             class="w-12 h-6 transition bg-blue-100 rounded-full outline-none dark:bg-blue-400"
                         ></div>
@@ -289,7 +289,7 @@
                             />
                             </svg>
                         </div>
-                        </button> --}}
+                        </button>
 
                         <!-- Notification button -->
                         {{-- <button
