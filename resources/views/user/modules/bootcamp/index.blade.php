@@ -256,27 +256,87 @@
             </div>
         </div>
 
-        <section class="bootcamp my-12">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                @foreach ($programs as $program)
-                    <a href="events/detail/{{ $program->id }}" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                        <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
-                        <div class="p-4">
-                            <div class="font-bold text-xl mb-2 line-clamp-2">{{ $program->title }}</div>
-                            <p class="text-gray-700 text-base">
-                                <span id="date" class="block mb-1 text-sm">
-                                    <i class="fa-solid fa-calendar-days mr-2"></i> {{ date_format(date_create($program->start_date),"D, d M Y"); }}
-                                </span>
-                                <span id="time" class="block mb-1 text-sm">
-                                    <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
-                                </span>
-                                <span id="price" class="block mb-1 text-sm">
-                                    <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
-                                </span>
-                            </p>
-                        </div>
-                    </a>
-                @endforeach
+        <section id="bootcamp" class="p-8">
+            <div class="container max-w-7xl mx-auto w-full h-full py-4 my-4">
+                <h2 class="text-2xl font-bold text-center text-neutral-500 mb-3">
+                    Main Events
+                </h2>
+                <hr>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach ($main as $program)
+                        <a href="events/detail/{{ $program->id }}" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                            <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                            <div class="p-4">
+                                <div class="font-bold text-xl mb-2 line-clamp-2">{{ $program->title }}</div>
+                                <p class="text-gray-700 text-base">
+                                    <span id="date" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-calendar-days mr-2"></i> {{ date_format(date_create($program->start_date),"D, d M Y"); }}
+                                    </span>
+                                    <span id="time" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
+                                    </span>
+                                    <span id="price" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
+                                    </span>
+                                </p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="container max-w-7xl mx-auto w-full h-full py-4 my-4">
+                <h2 class="text-2xl font-bold text-center text-neutral-500 mb-3">
+                    Mini Events
+                </h2>
+                <hr>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach ($mini as $program)
+                        <a href="events/detail/{{ $program->id }}" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                            <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                            <div class="p-4">
+                                <div class="font-bold text-xl mb-2 line-clamp-2">{{ $program->title }}</div>
+                                <p class="text-gray-700 text-base">
+                                    <span id="date" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-calendar-days mr-2"></i> {{ date_format(date_create($program->start_date),"D, d M Y"); }}
+                                    </span>
+                                    <span id="time" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
+                                    </span>
+                                    <span id="price" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
+                                    </span>
+                                </p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="container max-w-7xl mx-auto w-full h-full py-4 my-4">
+                <h2 class="text-2xl font-bold text-center text-neutral-500 mb-3">
+                    Free Events
+                </h2>
+                <hr>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach ($free as $program)
+                        <a href="events/detail/{{ $program->id }}" class="block bg-white rounded-xl overflow-hidden shadow-lg">
+                            <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                            <div class="p-4">
+                                <div class="font-bold text-xl mb-2 line-clamp-2">{{ $program->title }}</div>
+                                <p class="text-gray-700 text-base">
+                                    <span id="date" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-calendar-days mr-2"></i> {{ date_format(date_create($program->start_date),"D, d M Y"); }}
+                                    </span>
+                                    <span id="time" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
+                                    </span>
+                                    <span id="price" class="block mb-1 text-sm">
+                                        <i class="fa-solid fa-tag mr-2"></i> <span class="text-red-500">Rp. 0</span><span class="text-green-500">/ Free </span>
+                                    </span>
+                                </p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </section>
     </div>
