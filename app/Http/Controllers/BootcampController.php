@@ -10,14 +10,20 @@ class BootcampController extends Controller
 
     public function index() {
         // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
-        $programs = Program::with(['Option.Value', 'Image'])->get();
-        return view('user.modules.bootcamp.index', compact('programs'));
+        $main = Program::with(['Option.Value', 'Image'])->where('category_id', 1)->get();
+        $mini = Program::with(['Option.Value', 'Image'])->where('category_id', 2)->get();
+        $free = Program::with(['Option.Value', 'Image'])->where('category_id', 3)->get();
+        return view('user.modules.bootcamp.index', compact('main', 'mini', 'free'));
     }
 
     public function home() {
         // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
-        $programs = Program::with(['Option.Value', 'Image'])->get();
-        return view('user.modules.home.index', compact('programs'));
+        // $programs = Program::with(['Option.Value', 'Image'])->get();
+        $main = Program::with(['Option.Value', 'Image'])->where('category_id', 1)->get();
+        $mini = Program::with(['Option.Value', 'Image'])->where('category_id', 2)->get();
+        $free = Program::with(['Option.Value', 'Image'])->where('category_id', 3)->get();
+
+        return view('user.modules.home.index', compact('main', 'mini', 'free'));
     }
 
     public function all() {
