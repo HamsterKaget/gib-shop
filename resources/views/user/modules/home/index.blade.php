@@ -13,7 +13,7 @@
         <div class="container max-w-7xl mx-auto w-full h-full">
             <div class="grid grid-cols-7 items-center gap-3">
                 <div class="col-span-7 md:col-span-4">
-                    <h1 class="font-bold text-2xl md:text-3xl mb-4 md:mr-8">Join Us and Boost Your Skills with Our Professional Bootcamps and Programs</h1>
+                    <h1 class="font-bold text-2xl md:text-3xl mb-4 md:mr-8">Transform Your Skills, Transform Your Future:<br/>Register Today for our Skill-Boosting Program!</h1>
                     <p class="mb-6 md:mr-8">Unlock your potential with our expert-led programs and bootcamps! From digital marketing to cybersecurity, we offer a wide range of courses to help you enhance your skills and take your career to the next level. <br><br>Join us today and let's start your learning journey together!</p>
                     <a href="#" class="mt-6 py-2 px-4 bg-indigo-500 text-white rounded-md shadow-lg">Register Free Account !</a>
                 </div>
