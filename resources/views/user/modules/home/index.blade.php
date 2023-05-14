@@ -14,7 +14,8 @@
             <div class="grid grid-cols-7 items-center gap-3">
                 <div class="col-span-7 md:col-span-4">
                     <h1 class="font-bold text-2xl md:text-3xl mb-4 md:mr-8">Transform Your Skills, Transform Your Future:<br/>Register Today for our Skill-Boosting Program!</h1>
-                    <p class="mb-6 md:mr-8">Unlock your potential with our expert-led programs and bootcamps! From digital marketing to cybersecurity, we offer a wide range of courses to help you enhance your skills and take your career to the next level. <br><br>Join us today and let's start your learning journey together!</p>
+                    <p class="mb-6 md:mr-8">Transforming your skills is the key to unlocking a world of new possibilities. Take charge of your future by enrolling in our skill-boosting program and let us guide you toward a pathway of growth and success.
+                        <br><br>This is your ticket to unlocking your full potential and shaping a brighter future.</p>
                     <a href="#" class="mt-6 py-2 px-4 bg-indigo-500 text-white rounded-md shadow-lg">Register Free Account !</a>
                 </div>
                 <div class="col-span-7 md:col-span-3 hidden md:block">
@@ -23,32 +24,6 @@
             </div>
         </div>
     </section>
-
-
-
-    {{-- <section class="bootcamp my-12">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach ($programs as $program)
-                <a href="events/detail/{{ $program->id }}" class="block bg-white rounded-xl overflow-hidden shadow-lg">
-                    <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
-                    <div class="p-4">
-                        <div class="font-bold text-xl mb-2 line-clamp-2">{{ $program->title }}</div>
-                        <p class="text-gray-700 text-base">
-                            <span id="date" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-calendar-days mr-2"></i> {{ date_format(date_create($program->start_date),"D, d M Y"); }}
-                            </span>
-                            <span id="time" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
-                            </span>
-                            <span id="price" class="block mb-1 text-sm">
-                                <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
-                            </span>
-                        </p>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-    </section> --}}
 
     <section id="bootcamp" class="p-8">
         <div class="container max-w-7xl mx-auto w-full h-full py-4 my-4">
