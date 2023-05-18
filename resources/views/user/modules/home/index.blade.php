@@ -45,7 +45,7 @@
                                     <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
                                 </span>
                                 <span id="price" class="block mb-1 text-sm">
-                                    <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
+                                    <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}} / $ {{ number_format(($program->price / 15000))}}
                                 </span>
                             </p>
                         </div>
@@ -72,7 +72,7 @@
                                     <i class="fa-solid fa-clock mr-2"></i> {{ $program->time }}
                                 </span>
                                 <span id="price" class="block mb-1 text-sm">
-                                    <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}}
+                                    <i class="fa-solid fa-tag mr-2"></i> Rp. {{ number_format($program->price)}} / $ {{ number_format(($program->price / 15000))}}
                                 </span>
                             </p>
                         </div>
