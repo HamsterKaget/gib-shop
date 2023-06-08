@@ -116,12 +116,21 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                                                 {{ number_format($program->stock) }}
                                             </span>
                                         </span>
-                                        <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                            <i class="fa-solid fa-tags"></i>
-                                            <span class="ml-1.5">
-                                                Rp {{ number_format($program->price) }}
+                                        {{-- <span> --}}
+                                            <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                                <i class="fa-solid fa-tags"></i>
+                                                <span class="ml-1.5">
+                                                    Rp {{ number_format($program->price) }}
+                                                    /
+                                                    $ {{ number_format(($program->price / 15000)) }}
+                                                </span>
                                             </span>
-                                        </span>
+                                            {{-- <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                                <i class="fa-solid fa-tags"></i>
+                                                <span class="ml-1.5">
+                                                </span>
+                                            </span> --}}
+                                        {{-- </span> --}}
                                     </div>
                                     {{-- <p><i class="fa-solid fa-cube m-1"></i> Stock : {{ $program->stock }}</p>
                                     <p class="mt-1"><i class="fa-solid fa-calendar m-1"></i> Start Date : {{date_format(date_create($program->start_date),"D, d M Y"); }}</p>
@@ -145,7 +154,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                                                     {{ $option->options }}
                                                 </label>
                                                 <input type="hidden" name="options[{{ $option->id }}][id]" value="{{ $option->id }}">
-                                                <select required name="options[{{ $option->id }}][value_id]" id="option_value_id_{{ $option->id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
+                                                <select required name="options[{{ $option->id }}][value_id]" id="option_value_id_{{ $option->id }}" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
                                                     <option value="" selected>Choose an option</option>
                                                     @if ($option->Value->isNotEmpty())
                                                         @foreach ($option->Value as $value)

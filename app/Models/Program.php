@@ -24,6 +24,10 @@ class Program extends Model
         "time",
         "stock",
         "price",
+        "eksternal_link",
+        "slug",
+        "created_at",
+        "updated_at",
     ];
 
     // Define Relation

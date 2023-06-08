@@ -9,6 +9,9 @@ use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,31 +24,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/home');
-});
-
-
-// Route::get('/dashboard', function () {
-//     return view('admin.modules.home.index');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/home',function () {
-//     return view('user.modules.home.index');
-// })->name('home');
-
+/*
+ * | GUEST ROUTES |
+ *
+ */
+Route::get('/', function () { return redirect('/home');});
 Route::get('/home', [BootcampController::class, 'home'])->name('home');
-Route::get('/mail', [MailController::class, 'index'])->name('index');
+// Route::get('/mail', [MailController::class, 'index'])->name('index');
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 
-// Route::get('/events',function () {
-//     return view('user.modules.bootcamp.index');
-// })->name('events');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 
 Route::name('events.')->prefix('/events')->group(function() {
     Route::get('/', [BootcampController::class, 'index'])->name('index');
     Route::get('/all', [BootcampController::class, 'index'])->name('all');
-    Route::get('/detail/{id}', [BootcampController::class, 'show'])->name('show');
+    // Route::get('/detail/{id}', [BootcampController::class, 'show'])->name('show');
+    Route::get('/detail/{slug}', [BootcampController::class, 'showBySlug'])->name('show');
 });
 
 Route::get('/mini-event',function () {
@@ -55,7 +65,7 @@ Route::get('/mini-event',function () {
 Route::get('/404',function () {
     return view('error.error');
 });
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -90,6 +100,7 @@ Route::middleware(['auth', 'admin'])->name('dashboard.')->prefix('/dashboard')->
 
     Route::name('manage-event.')->prefix('/manage-event')->group(function() {
         Route::get('/', [ManageEventController::class, 'index'])->name('index');
+        Route::get('/table', [ManageEventController::class, 'table'])->name('table');
         Route::post('/', [ManageEventController::class, 'store'])->name('store');
         Route::put('/', [ManageEventController::class, 'update'])->name('update');
         Route::delete('/', [ManageEventController::class, 'destroy'])->name('destroy');
