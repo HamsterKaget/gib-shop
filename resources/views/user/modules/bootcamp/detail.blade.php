@@ -1,5 +1,9 @@
 @extends('user.layouts.app')
 
+@section('title')
+        {{ "Buy Ticket " . $program->title . " | GatheringInBali" }}
+@endsection
+
 @push('css')
 <link
 rel="stylesheet"
