@@ -475,7 +475,7 @@
                     // }
                 })
                 .then(resultJson => {
-                    // console.log(resultJson.data.data.data);
+                    // console.log(resultJson);
                     this.render(resultJson.data);
                 })
                 .catch(errorResponse => {
