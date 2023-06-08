@@ -119,8 +119,39 @@
                         <textarea name="address" id="address" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                     </div>
 
-                    <div class="flex flex-col space-y-2 items-end">
-                        <span class="font-bold text-lg">Rp {{ number_format($total) }} | $ {{ number_format(($total / 15000)) }}<br></span>
+                    @php
+                        $totalPrice = 0;
+                    @endphp
+                    <div class="p-4 bg-green-200 rounded-lg">
+                        <div class="flex items-center text-center justify-center">
+                            <h3 class="text-lg font-semibold">Payment Details</h3>
+                        </div>
+                        <div class="bg-red-200 text-xs text-center text-red-600 p-1.5 rounded-sm mb-4">
+                            <p><span>* All payments are charged in Rupiah. Please note that currency conversion fees may apply.</span></p>
+                        </div>
+                        <div class="flex flex-col space-y-1 text-sm">
+                            <div class="flex justify-between">
+                                <span>Total Product Price</span>
+                                <span>Rp {{ number_format($total) }} | $ {{ number_format(($total / 15000)) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                @php
+                                    $percent = 3;
+                                    $fee = $total * ($percent / 100);
+                                    $totalPrice = $total + $fee;
+                                @endphp
+                                <span>Service Fee (*3%)</span>
+                                <span>Rp {{ number_format($fee) }} | $ {{ number_format(($fee / 15000)) }}</span>
+                                <!-- Add more rows for other payment details -->
+                            </div>
+                            {{-- <div class="mt-4 text-right">
+                                <span class="text-lg font-semibold">Total: Rp {{ number_format(($totalPrice)) }} | $ {{ number_format((($totalPrice) / 15000)) }}</span>
+                            </div> --}}
+                        </div>
+
+
+                    <div class="flex flex-col space-y-2 items-end border-t-2 border-green-950 mt-1.5 pt-1.5">
+                        <span class="font-bold text-lg">Rp {{ number_format($totalPrice) }} | $ {{ number_format(($totalPrice / 15000)) }}<br></span>
                         @if (isset($snapToken))
                             <button id="pay-button" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600">Pay Now</button>
                         @else
