@@ -105,7 +105,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Register Now | Gathering In Bali</title>
     @vite('resources/css/app.css')
     <style>
         /*remove custom style*/
@@ -272,7 +272,7 @@
                         <h2 class="mt-6 text-3xl font-bold text-gray-900">
                             Welcome!
                         </h2>
-                        <p class="mt-2 text-sm text-gray-500">Please sign un to your account</p>
+                        <p class="mt-2 text-sm text-gray-500">Please sign up to your account</p>
                     </div>
                     {{-- <div class="flex flex-row justify-center items-center space-x-3">
                         <a href="https://www.behance.net/ajeeshmon" target="_blank"
@@ -314,6 +314,7 @@
                         </label>
                         <input class="w-full content-center text-base px-4 py-2 border-b rounded-2xl border-gray-300 focus:outline-none focus:border-indigo-500"
                         id="name" name="name" type="text" placeholder="Enter your full name" required>
+                        <p><span class="text-xs text-muted text-slate-400">*Dear Users, please use your real name during registration, the name you enter will be used as the name on the certificate</span></p>
                     </div>
                     <div class="mt-8 content-center">
                         <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">
