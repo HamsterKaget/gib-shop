@@ -1,7 +1,7 @@
 
 @extends('user.layouts.app')
 
-@section('title', 'My Page Title')
+@section('title', 'Gathering In Bali')
 
 @push('css')
     <!-- Add Swiper JS and CSS -->
