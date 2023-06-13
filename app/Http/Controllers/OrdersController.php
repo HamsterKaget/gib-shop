@@ -51,6 +51,9 @@ class OrdersController extends Controller
             $program = $programDetail->Program()->first();
             $totalAmount += $program->price * $programDetail->quantity;
         }
+
+        $totalAmount += $totalAmount * 0.03; // Adding 3% to the totalAmount
+
          // Create an order record
         $order = Orders::create([
             'user_id' => $cart->user_id,
