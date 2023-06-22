@@ -6,10 +6,13 @@
             <div class="flex flex-col justify-between h-full">
                 <div class="px-6 pt-4 overflow-y-auto">
                     <div class="flex items-center justify-between">
-                        <div aria-label="Home" role="img" class="flex items-center">
-                            <img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8">
-                            <p class="text-bold md:text2xl text-base pl-3 text-gray-800">GatheringInBali</p>
-                        </div>
+                        <a href="https://gatheringinbali.com">
+                            <div aria-label="Home" role="img" class="flex items-center">
+
+                                <img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8">
+                                <p class="text-bold md:text2xl text-base pl-3 text-gray-800">GatheringInBali</p>
+                            </div>
+                        </a>
                         <button id="cross" class="hidden text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 rounded" onclick="sidebarHandler(false)">
                             <svg aria-label="close sidebar" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
@@ -226,8 +229,10 @@
                             />
                         </g>
                     </svg> --}}
-                    <a href="{{ route('home') }}"><img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8"></a>
-                    <h3 class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block">GatheringInBali</h3>
+                    <a href="https://gatheringinbali.com" class="flex items-center" >
+                        <img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8">
+                        <h3 class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block">GatheringInBali</h3>
+                    </a>
                 </div>
                 <ul class="pr-12 xl:flex items-center h-full hidden">
                     <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm tracking-normal {{ Route::is('home') ? 'border-b-2 border-indigo-700 text-indigo-700' : 'text-gray-800' }}"><a href="{{ route('home') }}">Home</a></li>
@@ -317,15 +322,15 @@
                                         </svg>
                                         <a href="javascript:void(0)" class="ml-2">Help Center</a>
                                     </li> --}}
-                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 my-1.5 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" />
                                             <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                             <circle cx="12" cy="12" r="3" />
                                         </svg>
-                                        <a href="{{ route('user-dashboard.home') }}" class="ml-2">Account Settings</a>
+                                        <a href="{{ route('user-dashboard.home') }}" class="ml-2">Dashboard</a>
                                     </li>
-                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 my-1.5 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <i class="fa-solid fa-right-from-bracket ml-1"></i>

@@ -42,9 +42,20 @@ class BootcampController extends Controller
     public function home() {
         // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
         // $programs = Program::with(['Option.Value', 'Image'])->get();
-        $main = Program::with(['Option.Value', 'Image'])->where('category_id', 1)->get();
-        $mini = Program::with(['Option.Value', 'Image'])->where('category_id', 2)->get();
-        $free = Program::with(['Option.Value', 'Image'])->where('category_id', 3)->get();
+        $main = Program::with(['Option.Value', 'Image'])
+            ->where('category_id', 1)
+            ->where('status', '!=', 'archived')
+        ->get();
+
+        $mini = Program::with(['Option.Value', 'Image'])
+            ->where('category_id', 2)
+            ->where('status', '!=', 'archived')
+        ->get();
+
+        $free = Program::with(['Option.Value', 'Image'])
+            ->where('category_id', 3)
+            ->where('status', '!=', 'archived')
+        ->get();
 
         return view('user.modules.home.index', compact('main', 'mini', 'free'));
     }
