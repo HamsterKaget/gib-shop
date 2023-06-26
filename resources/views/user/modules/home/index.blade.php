@@ -42,7 +42,8 @@
                     @endphp
                     <a href="{{ $isPastDate ? '#' : 'events/detail/'.$program->slug }}" class="block bg-white rounded-xl overflow-hidden shadow-lg{{ $isPastDate ? ' grayscale' : '' }}" data-aos="fade-up" data-aos-delay="{{ $delay }}">
                             {{-- <div class="relative"> --}}
-                                <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                                {{-- <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image"> --}}
+                                <img class="h-54 w-full object-cover" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="Card Image">
                                 <div class="p-4">
                                     <div class="font-bold text-xl mb-2 line-clamp-2 {{ $isPastDate ? 'text-slate-400' : ''}}">{{ $program->title }}</div>
                                     <p class="{{ $isPastDate ? 'text-slate-400' : 'text-gray-700' }} text-base">
@@ -85,7 +86,8 @@
                     @endphp
                     <a href="{{ $isPastDate ? '#' : 'events/detail/'.$program->slug }}" class="block bg-white rounded-xl overflow-hidden shadow-lg{{ $isPastDate ? ' grayscale' : '' }}" data-aos="fade-up" data-aos-delay="{{ $delay }}">
                             {{-- <div class="relative"> --}}
-                                <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                                {{-- <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image"> --}}
+                                <img class="h-54 w-full object-cover" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="Card Image">
                                 <div class="p-4">
                                     <div class="font-bold text-xl mb-2 line-clamp-2 {{ $isPastDate ? 'text-slate-400' : ''}}">{{ $program->title }}</div>
                                     <p class="{{ $isPastDate ? 'text-slate-400' : 'text-gray-700' }} text-base">
@@ -128,7 +130,8 @@
                     @endphp
                     <a href="{{ $isPastDate ? '#' : 'events/detail/'.$program->slug }}" class="block bg-white rounded-xl overflow-hidden shadow-lg{{ $isPastDate ? ' grayscale' : '' }}" data-aos="fade-up" data-aos-delay="{{ $delay }}">
                             {{-- <div class="relative"> --}}
-                                <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image">
+                                {{-- <img class="h-54 w-full object-cover" src="{{ asset($program->thumbnail) }}" alt="Card Image"> --}}
+                                <img class="h-54 w-full object-cover" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="Card Image">
                                 <div class="p-4">
                                     <div class="font-bold text-xl mb-2 line-clamp-2 {{ $isPastDate ? 'text-slate-400' : ''}}">{{ $program->title }}</div>
                                     <p class="{{ $isPastDate ? 'text-slate-400' : 'text-gray-700' }} text-base">
