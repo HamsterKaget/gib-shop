@@ -45,7 +45,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                             <div class="swiper-wrapper">
                                 @if($program->thumbnail)
                                 <div class="swiper-slide">
-                                    <img class="max-h-56 rounded-lg" src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
+                                    <img class="max-h-56 rounded-lg" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="{{ $program->title }}">
                                 </div>
                                 @endif
                                 @if ($program->Image->isNotEmpty())
