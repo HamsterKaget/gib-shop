@@ -26,7 +26,8 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                             <div class="swiper-wrapper">
                                 @if($program->thumbnail)
                                 <div class="swiper-slide">
-                                    <img class="lg:max-h-[512px] sm:max-h-[85vh] max-h-[90vw] rounded-lg mx-auto" src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
+                                    {{-- <img class="h-54 w-full object-cover" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="Card Image"> --}}
+                                    <img class="lg:max-h-[512px] sm:max-h-[85vh] max-h-[90vw] rounded-lg mx-auto" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="{{ $program->title }}">
                                 </div>
                                 @endif
                                 @if ($program->Image->isNotEmpty())
