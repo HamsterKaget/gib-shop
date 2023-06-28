@@ -53,60 +53,87 @@
                     <i class="fa-solid fa-plus fa-sm"></i><span class="ml-1.5">Show Modal</span>
                 </button>
             </div> --}}
-            <table class="table-auto w-full">
-                <thead>
-                    <tr>
-                        <th class="border px-4 py-2">#</th>
-                        <th class="border px-4 py-2">Order Code</th>
-                        <th class="border px-4 py-2">Total Amount</th>
-                        <th class="border px-4 py-2">Status</th>
-                        <th class="border px-4 py-2">Datetime</th>
-                        <th class="border px-4 py-2">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $i = 0;
-                    @endphp
-                    @foreach ($orders as $order)
-                        {{-- @dd($order) --}}
-                        <tr class="text-center">
-                            <td class="border px-4 py-2">{{ ++$i }}</td>
-                            <td class="border px-4 py-2">{{ $order->uuid }}</td>
-                            <td class="border px-4 py-2">{{ $order->total_amount_paid }}</td>
-                            <td class="border px-4 py-2">{{ $order->status }}</td>
-                            <td class="border px-4 py-2">{{ date_format(date_create($order->created_at),"D, d M Y, H:i:s e") }}</td>
-                            <td class="border px-4 py-2">
-                                @if ($order->status == "pending")
-                                <button class="bg-green-500 border-green-500 border-2 text-white py-1 px-3 w-full rounded" onclick="makePayment('{{ $order->snaptoken }}')">
-                                    <span class="text-sm">Pay Now</span>
-                                </button>
-                                @elseif ($order->status == "Success")
-                                    <button class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
-                                        <span class="text-sm">Paid</span>
-                                    </button>
-                                @elseif ($order->status == "Failed")
-                                    <button class="border-red-500 border-2 text-red-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
-                                        <span class="text-sm">Failed</span>
-                                    </button>
-                                @endif
-                            </td>
-
-                            {{--
-                            <td class="border px-4 py-2">
-                                <button onclick="editAction(this)" data-json="{{ json_encode($user) }}" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">
-                                    <i class="fa-solid fa-pen-to-square fa-sm"></i>
-                                </button>
-
-                                <button class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded ml-2" onclick="deleteUser({{ $user->id }})">
-                                    <i class="fa-solid fa-trash fa-sm"></i>
-                                </button>
-
-                            </td> --}}
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 text-center">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="border px-4 py-2">#</th>
+                            <th class="border px-4 py-2">Order Code</th>
+                            <th class="border px-4 py-2">Total Amount</th>
+                            <th class="border px-4 py-2">Status</th>
+                            <th class="border px-4 py-2">Datetime</th>
+                            <th class="border px-4 py-2">Action</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @php
+                            $i = 0;
+                        @endphp
+                        @foreach ($orders as $order)
+                            {{-- @dd($order) --}}
+                            {{-- <tr class="text-center"> --}}
+                            <tr class="odd:bg-white odd:border-b odd:dark:bg-gray-900 odd:dark:border-gray-700 even:border-b even:bg-gray-50 even:dark:bg-gray-800 even:dark:border-gray-700">
+                                <td class="border px-4 py-2">{{ ++$i }}</td>
+                                <td class="border px-4 py-2">{{ $order->uuid }}</td>
+                                <td class="border px-4 py-2">{{ $order->total_amount_paid }}</td>
+                                {{-- <td class="border px-4 py-2">{{ $order->status }} </td> --}}
+                                <td class="border-x px-4 py-3 flex items-center justify-normal">
+                                    @if (strtolower($order->status) === 'pending')
+                                        <span class="flex w-3 h-3 bg-yellow-300 rounded-full mr-3"></span>
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded w-full dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">
+                                            {{ $order->status }}
+                                        </span>
+                                    @elseif (strtolower($order->status) === 'success')
+                                        <span class="flex w-3 h-3 bg-green-500 rounded-full mr-3"></span>
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded w-full dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                                            {{ $order->status }}
+                                        </span>
+                                    @elseif (strtolower($order->status) === 'failed')
+                                        <span class="flex w-3 h-3 bg-red-500 rounded-full mr-3"></span>
+                                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded w-full dark:bg-gray-700 dark:text-red-400 border border-red-400">
+                                            {{ $order->status }}
+                                        </span>
+                                    @else
+                                        <span class="flex w-3 h-3 bg-gray-900 rounded-full dark:bg-gray-700 mr-3"></span>
+                                        <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded w-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                            {{ $order->status }}
+                                        </span>
+                                    @endif
+                                </td>
+
+                                <td class="border px-4 py-2">{{ date_format(date_create($order->created_at),"D, d M Y, H:i:s e") }}</td>
+                                <td class="border px-4 py-2">
+                                    @if ($order->status == "pending")
+                                    <button class="bg-green-500 border-green-500 border-2 text-white py-1 px-3 w-full rounded" onclick="makePayment('{{ $order->snaptoken }}')">
+                                        <span class="text-sm">Pay Now</span>
+                                    </button>
+                                    @elseif ($order->status == "Success")
+                                        <button class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
+                                            <span class="text-sm">Paid</span>
+                                        </button>
+                                    @elseif ($order->status == "Failed")
+                                        <button class="border-red-500 border-2 text-red-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
+                                            <span class="text-sm">Failed</span>
+                                        </button>
+                                    @endif
+                                </td>
+
+                                {{--
+                                <td class="border px-4 py-2">
+                                    <button onclick="editAction(this)" data-json="{{ json_encode($user) }}" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">
+                                        <i class="fa-solid fa-pen-to-square fa-sm"></i>
+                                    </button>
+
+                                    <button class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded ml-2" onclick="deleteUser({{ $user->id }})">
+                                        <i class="fa-solid fa-trash fa-sm"></i>
+                                    </button>
+
+                                </td> --}}
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             {{-- {{ $users->links() }} --}}
         </div>

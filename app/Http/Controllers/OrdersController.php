@@ -52,7 +52,8 @@ class OrdersController extends Controller
             $totalAmount += $program->price * $programDetail->quantity;
         }
 
-        $totalAmount += $totalAmount * 0.03; // Adding 3% to the totalAmount
+        // $totalAmount += $totalAmount * 0.03; // Adding 3% to the totalAmount
+        $totalAmount += round($totalAmount * 0.03);
 
          // Create an order record
         $order = Orders::create([
@@ -62,7 +63,7 @@ class OrdersController extends Controller
             'last_name' => $request->last_name,
             'backup_email' => $request->backup_email,
             'address' => $request->address,
-            'status' => 'pending',
+            'status' => 'PENDING',
             'total_amount_paid' => $totalAmount,
         ]);
 
@@ -223,11 +224,11 @@ class OrdersController extends Controller
 
                 }
             } else if ($request->status_code == 201) {
-                $order->status = "Pending";
+                $order->status = "PENDING";
             } else if ($request->status_code == 202) {
-                $order->status = "Failed";
+                $order->status = "FAILED";
             } else {
-                $order->status = "Error / Unpaid";
+                $order->status = "ERROR / UNPAID";
             }
 
             $order->save();
