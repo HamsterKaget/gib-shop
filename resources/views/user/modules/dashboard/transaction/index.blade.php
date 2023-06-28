@@ -103,15 +103,15 @@
 
                                 <td class="border px-4 py-2">{{ date_format(date_create($order->created_at),"D, d M Y, H:i:s e") }}</td>
                                 <td class="border px-4 py-2">
-                                    @if ($order->status == "pending")
+                                    @if (strtolower($order->status) === "pending")
                                     <button class="bg-green-500 border-green-500 border-2 text-white py-1 px-3 w-full rounded" onclick="makePayment('{{ $order->snaptoken }}')">
                                         <span class="text-sm">Pay Now</span>
                                     </button>
-                                    @elseif ($order->status == "Success")
+                                    @elseif (strtolower($order->status) === "success")
                                         <button class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
                                             <span class="text-sm">Paid</span>
                                         </button>
-                                    @elseif ($order->status == "Failed")
+                                    @elseif (strtolower($order->status) === "failed")
                                         <button class="border-red-500 border-2 text-red-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
                                             <span class="text-sm">Failed</span>
                                         </button>
