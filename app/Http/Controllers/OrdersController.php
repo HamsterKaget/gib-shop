@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ticketConfirmation;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Order;
@@ -12,8 +13,10 @@ use App\Models\OrderDetails;
 use App\Models\Orders;
 use App\Models\Program;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use PSpell\Config;
 
@@ -211,18 +214,23 @@ class OrdersController extends Controller
                 $order->status = "Success";
 
                 $i = 1;
-                foreach($order->orderDetails as $program) {
-                    // dd($order);
-                    $p = Program::find($program->program_id);
-                    $uuid = $program->program_id . $order->id. $order->user_id . $p->stock += $i++;
+
+                foreach ($order->orderDetails as $orderDetail) {
+                    $p = Program::find($orderDetail->program_id);
+                    $uuid = $orderDetail->id . $order->id . $order->user_id . $p->stock += $i++;
                     $ticket = Ticket::create([
                         "ticket_uuid" => $uuid,
-                        "program_id" => $program->program_id,
-                        "order_id" => $order->id,
+                        "program_id" => $orderDetail->program_id,
+                        "order_id" => $orderDetail->order_id,
                         "user_id" => $order->user_id,
                     ]);
-
                 }
+
+                // Send email confirmation to the user with the ticket UUID
+                $user = User::find($order->user_id);
+                Mail::to($user->email)->send(new ticketConfirmation($ticket));
+
+
             } else if ($request->status_code == 201) {
                 $order->status = "PENDING";
             } else if ($request->status_code == 202) {
