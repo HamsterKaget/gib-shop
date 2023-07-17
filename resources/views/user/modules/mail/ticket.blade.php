@@ -22,7 +22,8 @@
         <!-- Add any other ticket details you want to include -->
     </table>
 
-    p>To view your ticket, please click on the following link:</p>
+    <hr>
+    <p>To view your ticket, please click on the following link:</p>
     <a href="{{ route('user-dashboard.ticket.view', ['uuid' => $ticket->ticket_uuid]) }}">View Ticket</a>
 
 
