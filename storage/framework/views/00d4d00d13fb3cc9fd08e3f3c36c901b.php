@@ -105,7 +105,8 @@
                             <td class="text-left" style="padding: 6px;">Rp ${numberFormat(detail.program.price * detail.quantity)}</td>
                             <td style="padding: 6px;">
                                 <div class="flex flex-col">
-                                    <form action="${detail.id}" method="POST">
+                                    <form action="/cart/remove/${detail.id}" method="POST">
+                                        <?php echo csrf_field(); ?>
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="">
                                             <svg class="w-5 h-5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
