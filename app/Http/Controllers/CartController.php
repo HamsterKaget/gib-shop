@@ -58,6 +58,7 @@ use App\Models\CartDetailOptions;
 use App\Models\ProgramOption;
 use App\Models\OptionValue;
 use App\Models\ProgramOptionValue;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -80,21 +81,26 @@ class CartController extends Controller
         // Create an associative array to group details by program_id
         $groupedDetails = [];
 
-        foreach ($cart->Details as $detail) {
-            $programId = $detail->program_id;
+        try {
+            foreach ($cart->Details as $detail) {
+                $programId = $detail->program_id;
 
-            // If the program_id is not in the grouped array, add it with the detail data
-            if (!isset($groupedDetails[$programId])) {
-                $groupedDetails[$programId] = $detail;
-            } else {
-                // If the program_id is already in the array, increment the quantity
-                $groupedDetails[$programId]->quantity += $detail->quantity;
+                // If the program_id is not in the grouped array, add it with the detail data
+                if (!isset($groupedDetails[$programId])) {
+                    $groupedDetails[$programId] = $detail;
+                } else {
+                    // If the program_id is already in the array, increment the quantity
+                    $groupedDetails[$programId]->quantity += $detail->quantity;
+                }
             }
+
+            $cart->Details = array_values($groupedDetails);
+
+        } catch (Exception $e) {
+            // throw $;
+            return response()->json([$cart, $e], 200);
         }
-
         // Convert the grouped array back to an indexed array and assign it to cart->Details
-        $cart->Details = array_values($groupedDetails);
-
         return response()->json($cart);
     }
 
