@@ -7,15 +7,15 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('images/Stempel.ico') }}">
         <title>@yield('title')</title>
         <!-- Tailwind CSS -->
-        @vite('resources/css/app.css')
+        @vite(['resources/css/app.css','resources/js/app.js'])
         @stack('css')
         <script src="https://kit.fontawesome.com/38ab242903.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-gray-100 font-sans leading-normal tracking-normal">
         {{-- navbar --}}
-        @include('user.partials.navbar')
+        @include('user.partials.new-navbar')
         <!-- Page Content -->
-        <main class="min-h-screen pt-16">
+        <main class="min-h-screen">
             @yield('content')
         </main>
 

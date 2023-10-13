@@ -11,9 +11,10 @@
         <!-- Tailwind CSS -->
         {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}
         <link rel="icon" type="image/x-icon" href="{{ asset('images/Stempel.ico') }}">
-        @vite('resources/css/app.css')
+        {{-- @vite('resources/css/app.css') --}}
+        @vite(['resources/css/app.css','resources/js/app.js'])
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+        {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" /> --}}
         <script src="https://kit.fontawesome.com/38ab242903.js" crossorigin="anonymous"></script>
         @stack('css')
 
