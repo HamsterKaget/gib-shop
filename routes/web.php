@@ -3,9 +3,14 @@
 use App\Http\Controllers\BootcampController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardTransactionController;
+use App\Http\Controllers\DashboardUserTransactionController;
+use App\Http\Controllers\editProfileController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ManageEventController;
 use App\Http\Controllers\ManageUserController;
+use App\Http\Controllers\NewDashboardController;
+use App\Http\Controllers\NewUserDashboardcontroller;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,16 +37,16 @@ Route::get('/', function () { return redirect('/home');});
 Route::get('/home', [BootcampController::class, 'home'])->name('home');
 // Route::get('/mail', [MailController::class, 'index'])->name('index');
 
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
 
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
 
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
 Route::post('/email/verification-notification', function (Request $request) {
@@ -70,26 +75,49 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add/{program_id}', [CartController::class, 'add'])->name('cart.add');
-    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::name('cart.')->prefix('/cart')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::get('/getData', [CartController::class, 'getData'])->name('getData');
+        Route::post('/add/{program_id}', [CartController::class, 'add'])->name('add');
+        Route::delete('/remove/{id}', [CartController::class, 'remove'])->name('remove');
+    });
+
 
     // Route::get('/checkout', [OrdersController::class, 'index'])->name('checkout.index');
     Route::get('/checkout', [OrdersController::class, 'index'])->name('checkout.index');
     Route::post('/checkout/pay', [OrdersController::class, 'checkout'])->name('checkout.pay');
     // Route::get('/cart/store', [CartController::class, 'store'])->name('cart.store');
 
+    //! Route Dashboard User
     Route::name('user-dashboard.')->prefix('/user-dashboard')->group(function() {
         Route::get('/home', [DashboardController::class, 'home'])->name('home');
         Route::get('/transaction', [DashboardController::class, 'transaction'])->name('transaction');
         Route::get('/ticket', [DashboardController::class, 'ticket'])->name('ticket');
         Route::get('/ticket/view', [DashboardController::class, 'ticketDetail'])->name('ticket.view');
     });
+
+    // Route::name()->group(function () {
 });
 
-// Route Dashboard Admin
+Route::name('user-dashboard.v2.')->prefix('/user-dashboard/v2')->middleware('auth')->group(function () {
+    Route::get('/', [NewUserDashboardcontroller::class, 'index'])->name('home');
+
+    Route::name('transactions.')->prefix('/transactions')->group(function () {
+        Route::get('/', [DashboardTransactionController::class, 'index'])->name('index');
+        Route::get('/getData', [DashboardTransactionController::class, 'getData'])->name('getData');
+    });
+
+    Route::name('edit-profile.')->prefix('/edit-profile')->group(function () {
+        Route::get('/', [editProfileController::class, 'index'])->name('index');
+        Route::get('/getData', [editProfileController::class, 'getData'])->name('getData');
+    });
+
+});
+
+//! Route Dashboard Admin
 Route::middleware(['auth', 'admin'])->name('dashboard.')->prefix('/dashboard')->group(function() {
     Route::get('/', [ManageUserController::class, 'home'])->name('index');
+    Route::get('/v2', [NewDashboardController::class, 'index'])->name('home');
 
     Route::name('manage-user.')->prefix('/manage-user')->group(function() {
         Route::get('/', [ManageUserController::class, 'index'])->name('index');

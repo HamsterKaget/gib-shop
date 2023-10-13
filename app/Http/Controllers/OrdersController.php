@@ -32,7 +32,6 @@ class OrdersController extends Controller
         $request->validate([
             'cart_id' => 'required|exists:cart,id',
             'first_name' => 'required',
-            'last_name' => 'required',
             'backup_email' => 'nullable',
             'address' => 'nullable',
         ]);
@@ -122,7 +121,8 @@ class OrdersController extends Controller
         $cart->delete();
 
         // return view('user.modules.checkout.index', compact('snapToken', 'order', 'cart'));
-        return redirect()->to(route('user-dashboard.transaction'));
+        // return redirect()->to(route('user-dashboard.transaction'));
+        return response()->json($snapToken);
         // dd($snapToken);
 
     }

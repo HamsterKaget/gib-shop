@@ -72,6 +72,40 @@ class CartController extends Controller
         return view('user.modules.cart.index', compact('cart'));
     }
 
+    public function getData(Request $request)
+    {
+        // Get the cart details for the logged-in user
+        $cart = Cart::where('user_id', Auth::id())->with('Details.Program', 'Details.Options.OptionValue')->first();
+
+        // Create an associative array to group details by program_id
+        $groupedDetails = [];
+
+        foreach ($cart->Details as $detail) {
+            $programId = $detail->program_id;
+
+            // If the program_id is not in the grouped array, add it with the detail data
+            if (!isset($groupedDetails[$programId])) {
+                $groupedDetails[$programId] = $detail;
+            } else {
+                // If the program_id is already in the array, increment the quantity
+                $groupedDetails[$programId]->quantity += $detail->quantity;
+            }
+        }
+
+        // Convert the grouped array back to an indexed array and assign it to cart->Details
+        $cart->Details = array_values($groupedDetails);
+
+        return response()->json($cart);
+    }
+
+
+
+
+    public function addAmmount(Request $request)
+    {
+
+    }
+
     public function add(Request $request, $program_id)
     {
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
