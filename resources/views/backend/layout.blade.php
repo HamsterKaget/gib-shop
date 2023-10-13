@@ -25,7 +25,6 @@
 
 
         @stack('pre-js')
-        @vite(['resources/js/helper.js'])
         <script src="/helper.js"></script>
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script> --}}
         @stack('post-js')

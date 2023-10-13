@@ -194,7 +194,7 @@
         axios.get(pageUrl, { params: null })
             .then(function (response) {
                 const data = response.data;
-                if (data && data.Details.length > 0) {
+                if (data.Details && data.Details.length > 0) {
                     // Create the table and its components
                     const table = document.createElement("table");
 
@@ -410,27 +410,32 @@
                             // alert("Payment success!");
                             getData();
                             console.log(result);
+                            window.location = "https://shop.gatheringinbali.com/user-dashboard/v2/transactions";
+
                         },
                         onPending: function(result){
                             /* You may add your own implementation here */
                             // alert("Waiting for your payment!");
                             // console.log(result);
                             getData();
+                            window.location = "https://shop.gatheringinbali.com/user-dashboard/v2/transactions";
                         },
                         onError: function(result){
                             /* You may add your own implementation here */
                             alert("Payment failed!");
                             getData();
                             console.log(result);
+                            window.location = "https://shop.gatheringinbali.com/user-dashboard/v2/transactions";
                         },
                         onClose: function(){
                             /* You may add your own implementation here */
                             alert("You closed the popup without finishing the payment");
                             getData();
+                            window.location = "https://shop.gatheringinbali.com/user-dashboard/v2/transactions";
                         }
                     });
                 });
-                getData();
+                // getData();
             })
             .catch(error => {
                 console.error(error);

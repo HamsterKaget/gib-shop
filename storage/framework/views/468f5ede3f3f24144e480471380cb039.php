@@ -25,7 +25,6 @@
 
 
         <?php echo $__env->yieldPushContent('pre-js'); ?>
-        <?php echo app('Illuminate\Foundation\Vite')(['resources/js/helper.js']); ?>
         <script src="/helper.js"></script>
         
         <?php echo $__env->yieldPushContent('post-js'); ?>
