@@ -24,7 +24,9 @@
 
         <!-- JavaScript -->
         {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+        <script src="/dev/js/flowbite.min.js"></script>
         <script src="/helper.js"></script>
+
         @stack('js')
     </body>
 </html>
