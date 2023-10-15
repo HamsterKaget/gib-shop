@@ -24,6 +24,7 @@
 
         <!-- JavaScript -->
         
+        <script src="/helper.js"></script>
         <?php echo $__env->yieldPushContent('js'); ?>
     </body>
 </html>
