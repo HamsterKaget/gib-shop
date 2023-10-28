@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ManageUserRequest;
+use App\Http\Requests\ManageEventRequest;
 use App\Models\Program;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Storage;
+
 
 class ManageEventController extends Controller
 {
@@ -23,7 +23,13 @@ class ManageEventController extends Controller
             $where += ['name' => $request->search];
         }
 
-        $programs = Program::with($with)->where($where)->paginate(10);
+        $programs = Program::with($with)
+            ->where($where)
+            ->orderBy('id', 'desc')
+            // ->latest('updated_at')
+            ->paginate(5);
+
+
         $total = $programs->total();
 
         // dd($programs);
@@ -31,41 +37,78 @@ class ManageEventController extends Controller
         return view('admin.modules.manage-event.index', compact('programs', 'total'));
     }
 
+    public function table() {
+        $where = [];
+        $with = ["Category", "Image", "Option"];
+
+        $query = Program::with($with)
+            ->where($where)
+            ->orderBy('id', 'desc')
+            // ->latest('updated_at')
+            ->paginate(5);
+
+
+        $total = $query->total();
+
+        return response(['status' => 'success', 'data' => $query], 200);
+    }
+
     // make me function store for creating new user record
-    public function store(ManageUserRequest $request)
+    public function store(ManageEventRequest $request)
     {
         $request->validated();
-        // dd($request);
+        try {
+            $validatedData = $request->validated();
+
+            $thumbnail = $request->file('thumbnail');
+            $thumbnailName = hash('sha256', time()) . '.' . $thumbnail->getClientOriginalExtension();
+            $thumbnailPath = $thumbnail->storeAs('images/produk', $thumbnailName, 'public');
+            $validatedData['thumbnail'] = $thumbnailPath;
+
+            $startDate = date('Y-m-d', strtotime($validatedData['start_date']));
+            $endDate = date('Y-m-d', strtotime($validatedData['end_date']));
+
+            $validatedData['start_date'] = $startDate;
+            $validatedData['end_date'] = $endDate;
+
+            $data = Program::create($validatedData);
+
+            return response(['status' => 'success', "data" => $data], 200);
+        } catch (Exception $e) {
+            return response(['status' => 'failed', 'error' => $e], 500);
+        }
+
+    }
+
+    public function update(ManageEventRequest $request)
+    {
 
         try {
-            $user = new Program;
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->password = bcrypt($request->input('password'));
-            $user->save();
-            // you can also return a response or redirect to a page after the user is created
-            return response(['status' => 'success'], 200);
+            $validatedData = $request->validated();
+
+            $startDate = date('Y-m-d', strtotime($validatedData['start_date']));
+            $endDate = date('Y-m-d', strtotime($validatedData['end_date']));
+
+            $validatedData['start_date'] = $startDate;
+            $validatedData['end_date'] = $endDate;
+
+            $program = Program::findOrFail($validatedData['id']);
+
+            if ($request->hasFile('thumbnail')) {
+                $thumbnail = $request->file('thumbnail');
+                $thumbnailName = hash('sha256', time()) . '.' . $thumbnail->getClientOriginalExtension();
+                $thumbnailPath = $thumbnail->storeAs('images/produk', $thumbnailName, 'public');
+                $validatedData['thumbnail'] = $thumbnailPath;
+            }
+
+            $program->update($validatedData);
+
+            return response(['status' => 'success', 'data' => $program], 200);
         } catch (Exception $e) {
             return response(['status' => 'failed', 'error' => $e], 500);
         }
     }
 
-    public function update(ManageUserRequest $request)
-    {
-        $request->validated();
-        $userId = $request->input('id');
-        // dd('adaaa');
-
-        try {
-            $user = Program::findOrFail($userId);
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->save();
-            return response(['status' => 'success'], 200);
-        } catch (Exception $e) {
-            return response(['status' => 'failed', 'error' => $e], 500);
-        }
-    }
 
     public function destroy(Request $request)
     {
@@ -73,8 +116,8 @@ class ManageEventController extends Controller
         $userId = $request->input('id');
 
         try {
-            $user = Program::findOrFail($userId);
-            $user->delete();
+            $data = Program::findOrFail($userId);
+            $data->delete();
             return response(['status' => 'success'], 200);
         } catch (Exception $e) {
             return response(['status' => 'failed', 'error' => $e], 500);

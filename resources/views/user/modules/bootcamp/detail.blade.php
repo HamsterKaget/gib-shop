@@ -1,5 +1,9 @@
 @extends('user.layouts.app')
 
+@section('title')
+        {{ "Buy Ticket " . $program->title . " | GatheringInBali" }}
+@endsection
+
 @push('css')
 <link
 rel="stylesheet"
@@ -22,7 +26,8 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                             <div class="swiper-wrapper">
                                 @if($program->thumbnail)
                                 <div class="swiper-slide">
-                                    <img class="lg:max-h-[512px] sm:max-h-[85vh] max-h-[90vw] rounded-lg mx-auto" src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
+                                    {{-- <img class="h-54 w-full object-cover" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="Card Image"> --}}
+                                    <img class="lg:max-h-[512px] sm:max-h-[85vh] max-h-[90vw] rounded-lg mx-auto" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="{{ $program->title }}">
                                 </div>
                                 @endif
                                 @if ($program->Image->isNotEmpty())
@@ -40,7 +45,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                             <div class="swiper-wrapper">
                                 @if($program->thumbnail)
                                 <div class="swiper-slide">
-                                    <img class="max-h-56 rounded-lg" src="{{ asset($program->thumbnail) }}" alt="{{ $program->title }}">
+                                    <img class="max-h-56 rounded-lg" src="{{ strpos($program->thumbnail, 'images/Thumbnail') === 0 ? asset($program->thumbnail) : Storage::url($program->thumbnail) }}" alt="{{ $program->title }}">
                                 </div>
                                 @endif
                                 @if ($program->Image->isNotEmpty())
@@ -113,15 +118,67 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                                         <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
                                             <i class="fa-solid fa-cube"></i>
                                             <span class="ml-1.5">
-                                                {{ number_format($program->stock) }}
+                                                {{ number_format($program->stock) }} Left
                                             </span>
                                         </span>
-                                        <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                            <i class="fa-solid fa-tags"></i>
-                                            <span class="ml-1.5">
-                                                Rp {{ number_format($program->price) }}
-                                            </span>
-                                        </span>
+                                        {{-- <span> --}}
+                                        @php
+                                            $price = $program->price;
+
+                                            if (isset($program->Discount[0])) {
+                                                $discountedPrice = $program->Discount[0]->discount; // Initialize with the original price
+                                                $discountPercentage = $program->Discount[0]->percent; // Initialize with the original price
+                                            //     // dd($program->Discount);
+                                            //     $discountPercentage = $program->Discount[0]->discount; // Assuming you have the discount percentage
+                                            //     if ($discountPercentage) {
+                                            //         // Ensure the discount percentage is between 0 and 1 (e.g., 0.1 for 10%)
+                                            //         // dd('ada');
+                                            //         $discountedPrice = $price - ($price * ($discountPercentage / 100));
+                                            //     }
+                                            }
+                                        @endphp
+                                            @if (isset($program->Discount[0]))
+                                                <span class="bg-red-100 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-red-700 dark:text-red-400 border border-gray-500">
+                                                    <i class="fa-solid fa-tags"></i>
+                                                    <span class="ml-1.5">
+                                                        Rp {{ number_format($discountedPrice) }}
+                                                        /
+                                                        $ {{ number_format(($discountedPrice / 15000)) }}
+                                                    </span>
+                                                </span>
+                                                <span class="bg-red-100 mt-1 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-red-700 dark:text-red-400 border border-gray-500">
+                                                    {{-- <i class="fa-solid fa-tags"></i> --}}
+                                                    <svg class="w-3 h-3 my-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M18.435 7.546A2.32 2.32 0 0 1 17.7 5.77a3.354 3.354 0 0 0-3.47-3.47 2.322 2.322 0 0 1-1.776-.736 3.357 3.357 0 0 0-4.907 0 2.281 2.281 0 0 1-1.776.736 3.414 3.414 0 0 0-2.489.981 3.372 3.372 0 0 0-.982 2.49 2.319 2.319 0 0 1-.736 1.775 3.36 3.36 0 0 0 0 4.908A2.317 2.317 0 0 1 2.3 14.23a3.356 3.356 0 0 0 3.47 3.47 2.318 2.318 0 0 1 1.777.737 3.36 3.36 0 0 0 4.907 0 2.36 2.36 0 0 1 1.776-.737 3.356 3.356 0 0 0 3.469-3.47 2.319 2.319 0 0 1 .736-1.775 3.359 3.359 0 0 0 0-4.908ZM8.5 5.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm3 9.063a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm2.207-6.856-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 1.414Z"/>
+                                                    </svg>
+                                                    <span class="ml-0.5">
+                                                        Discount {{ number_format($discountPercentage) }}%
+                                                    </span>
+                                                </span>
+                                                <span class="opacity-60 line-through bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                                    <i class="fa-solid fa-tags"></i>
+                                                    <span class="ml-1.5">
+                                                        Rp {{ number_format($program->price) }}
+                                                        /
+                                                        $ {{ number_format(($program->price / 15000)) }}
+                                                    </span>
+                                                </span>
+                                                @else
+                                                <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                                    <i class="fa-solid fa-tags"></i>
+                                                    <span class="ml-1.5">
+                                                        Rp {{ number_format($program->price) }}
+                                                        /
+                                                        $ {{ number_format(($program->price / 15000)) }}
+                                                    </span>
+                                                </span>
+                                            @endif
+                                            {{-- <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                                <i class="fa-solid fa-tags"></i>
+                                                <span class="ml-1.5">
+                                                </span>
+                                            </span> --}}
+                                        {{-- </span> --}}
                                     </div>
                                     {{-- <p><i class="fa-solid fa-cube m-1"></i> Stock : {{ $program->stock }}</p>
                                     <p class="mt-1"><i class="fa-solid fa-calendar m-1"></i> Start Date : {{date_format(date_create($program->start_date),"D, d M Y"); }}</p>
@@ -145,7 +202,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                                                     {{ $option->options }}
                                                 </label>
                                                 <input type="hidden" name="options[{{ $option->id }}][id]" value="{{ $option->id }}">
-                                                <select required name="options[{{ $option->id }}][value_id]" id="option_value_id_{{ $option->id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
+                                                <select required name="options[{{ $option->id }}][value_id]" id="option_value_id_{{ $option->id }}" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5s">
                                                     <option value="" selected>Choose an option</option>
                                                     @if ($option->Value->isNotEmpty())
                                                         @foreach ($option->Value as $value)

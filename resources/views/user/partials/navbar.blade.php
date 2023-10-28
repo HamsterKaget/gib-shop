@@ -6,10 +6,13 @@
             <div class="flex flex-col justify-between h-full">
                 <div class="px-6 pt-4 overflow-y-auto">
                     <div class="flex items-center justify-between">
-                        <div aria-label="Home" role="img" class="flex items-center">
-                            <img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8">
-                            <p class="text-bold md:text2xl text-base pl-3 text-gray-800">GatheringInBali</p>
-                        </div>
+                        <a href="https://gatheringinbali.com">
+                            <div aria-label="Home" role="img" class="flex items-center">
+
+                                <img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8">
+                                <p class="text-bold md:text2xl text-base pl-3 text-gray-800">GatheringInBali</p>
+                            </div>
+                        </a>
                         <button id="cross" class="hidden text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 rounded" onclick="sidebarHandler(false)">
                             <svg aria-label="close sidebar" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
@@ -210,9 +213,6 @@
             </div>
         </div>
     </div>
-    <!-- Mobile -->
-    {{-- <div class="w-[90vw] container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
-    </div> --}}
 
     <nav class="mx-auto bg-white shadow fixed z-10 w-full opacity-90">
         <div class="max-w-screen w-[90vw] container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
@@ -226,8 +226,10 @@
                             />
                         </g>
                     </svg> --}}
-                    <a href="{{ route('home') }}"><img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8"></a>
-                    <h3 class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block">GatheringInBali</h3>
+                    <a href="https://gatheringinbali.com" class="flex items-center" >
+                        <img src="{{ asset('images/favicon.png') }}" alt="" class="h-8 w-8">
+                        <h3 class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block">GatheringInBali</h3>
+                    </a>
                 </div>
                 <ul class="pr-12 xl:flex items-center h-full hidden">
                     <li class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm tracking-normal {{ Route::is('home') ? 'border-b-2 border-indigo-700 text-indigo-700' : 'text-gray-800' }}"><a href="{{ route('home') }}">Home</a></li>
@@ -317,15 +319,15 @@
                                         </svg>
                                         <a href="javascript:void(0)" class="ml-2">Help Center</a>
                                     </li> --}}
-                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 my-1.5 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" />
                                             <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                             <circle cx="12" cy="12" r="3" />
                                         </svg>
-                                        <a href="{{ route('user-dashboard.home') }}" class="ml-2">Account Settings</a>
+                                        <a href="{{ route('user-dashboard.home') }}" class="ml-2">Dashboard</a>
                                     </li>
-                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                    <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 my-1.5 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <i class="fa-solid fa-right-from-bracket ml-1"></i>
@@ -352,56 +354,7 @@
             </div>
         </div>
     </nav>
-    <!-- Navigation ends -->
-    {{-- <!-- Page title starts -->
-    <div class="my-6 lg:my-12 container px-6 mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between pb-4 border-b border-gray-300">
-        <div>
-            <h4 class="text-2xl font-bold leading-tight text-gray-800">User Profile</h4>
-            <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 text-sm mt-3">
-                <li class="flex items-center mr-3 mt-3 md:mt-0">
-                    <span class="mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paperclip" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
-                        </svg>
-                    </span>
-                    <span>Active</span>
-                </li>
-                <li class="flex items-center mr-3 mt-3 md:mt-0">
-                    <span class="mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-up" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <polyline points="3 17 9 11 13 15 21 7" />
-                            <polyline points="14 7 21 7 21 14" />
-                        </svg>
-                    </span>
-                    <span> Trending</span>
-                </li>
-                <li class="flex items-center mt-3 md:mt-0">
-                    <span class="mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3 -6h3l2 2h3l-2 -7h3z" transform="rotate(-15 12 12) translate(0 -1)" />
-                            <line x1="3" y1="21" x2="21" y2="21" />
-                        </svg>
-                    </span>
-                    <span>Started on 29 Jan 2020</span>
-                </li>
-            </ul>
-        </div>
-        <div class="mt-6 lg:mt-0">
-            <button class="mx-2 my-2 bg-white transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white hover:bg-gray-100 rounded text-indigo-700 px-6 py-2 text-sm">Back</button>
-            <button class="transition duration-150 ease-in-out hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 border bg-indigo-700 rounded text-white px-8 py-2 text-sm">Edit Profile</button>
-        </div>
-    </div>
-    <!-- Page title ends -->
-    <div class="container mx-auto px-6">
-        <!-- Remove class [ h-64 ] when adding a card block -->
-        <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
-        <div class="w-full h-64 rounded border-dashed border-2 border-gray-300">
-            <!-- Place your content here -->
-        </div>
-    </div> --}}
+
 <script>
     function dropdownHandler(element) {
         let single = element.getElementsByTagName("ul")[0];

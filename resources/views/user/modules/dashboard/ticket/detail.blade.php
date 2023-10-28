@@ -1,253 +1,244 @@
+{{-- {{ dd($ticket->order->orderDetails) }} --}}
+@php
+    use Carbon\Carbon;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <title>Ticket Detail</title>
+    <title>Ticket</title>
     <style>
-        body {
-            background: #f0f0f0;
-            font-size: 17px;
-            display: flex;
-            justify-items: center;
-            align-items: center;
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+        body, p, h1 {
+            margin: 0;
+            padding: 0;
+            font-family: "Open Sans", sans-serif;
         }
         .container {
-            display: flex;
-            justify-items: center;
-            align-items: center;
-            max-width: 900px;
-            width: 92%;
-            margin: 50px auto 50px auto;
-        }
-        * {
-            box-sizing: border-box;
-        }
-        .bp-card {
+            background: #e0e2e8;
             position: relative;
+            width: 100%;
+            height: 100vh;
         }
-        .bp-card .bp-card_label {
+        .container .ticket {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .container .basic {
+            display: none;
+        }
+        .airline {
+            display: block;
+            height: 625px;
+            width: 285px;
+            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 25px;
+            z-index: 3;
+        }
+        .airline .top {
+            height: 220px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ strpos($ticket->program->thumbnail, 'images/Thumbnail') === 0 ? asset($ticket->program->thumbnail) : Storage::url($ticket->program->thumbnail) }}');
+            background-size: cover;
+            background-position: center;
+            border-top-right-radius: 25px;
+            border-top-left-radius: 25px;
+        }
+
+        .airline .top h1 {
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2;
+            text-align: center;
             position: absolute;
             top: 30px;
-            left: 0;
-            bottom: 30px;
-            width: 130px;
-            background: white;
-            cursor: pointer;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        .bp-card .bp-card_label::before {
-            content: '';
-            background-color: transparent;
-            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/372262/ticket-top.svg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            width: 130px;
-            height: 100px;
-            position: absolute;
-            top: -30px;
-            left: 0;
+        .airline .bottom {
+            height: 405px;
+            background: #fff;
+            border-bottom-right-radius: 25px;
+            border-bottom-left-radius: 25px;
         }
-        .bp-card .bp-card_label::after {
-            content: '';
-            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/372262/ticket-bottom.svg');
-            background-size: contain;
-            background-position: bottom left;
-            background-repeat: no-repeat;
-            width: 130px;
-            height: 100px;
+        .top .big {
             position: absolute;
+            top: 100px;
+            font-size: 65px;
+            font-weight: 700;
+            line-height: 0.8;
+        }
+        .top .big .from {
+            color: #ffcc05;
+            text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+        }
+        .top .big .to {
+            position: absolute;
+            left: 32px;
+            font-size: 35px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .top .big .to i {
+            margin-top: 5px;
+            margin-right: 10px;
+            font-size: 15px;
+        }
+        .top--side {
+            position: absolute;
+            right: 35px;
+            top: 110px;
+            text-align: right;
+        }
+        .top--side i {
+            font-size: 25px;
+            margin-bottom: 18px;
+        }
+        .top--side p {
+            font-size: 10px;
+            font-weight: 700;
+        }
+        .top--side p + p {
+            margin-bottom: 8px;
+        }
+        .bottom p {
+            display: flex;
+            flex-direction: column;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .bottom p span {
+            font-weight: 400;
+            font-size: 11px;
+            color: #6c6c6c;
+        }
+        .bottom .column {
+            margin: 0 auto;
+            width: 80%;
+            padding: 2rem 0;
+        }
+        .bottom .row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .bottom .row--right {
+            text-align: right;
+        }
+        .bottom .row--center {
+            text-align: center;
+        }
+        .bottom .row-2 {
+            margin: 30px 0 60px 0;
+            position: relative;
+        }
+        .bottom .row-2::after {
+            content: "";
+            position: absolute;
+            width: 100%;
             bottom: -30px;
             left: 0;
+            background: #000;
+            height: 1px;
         }
-        .bp-card .bp-card_label .bd-border_dotted {
-            content: '';
-            width: 0px;
-            border-right: 5px dashed #f0f0f0;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            right: 40px;
-        }
-        .bp-card .bp-card_label .bd-border_solid {
-            content: '';
-            width: 3px;
-            border-radius: 3px;
-            background: #ffaf96;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: calc(130px/3.1);
-        }
-        .bp-card .bp-card_content {
+        /* .bottom .bar--code {
+            height: 50px;
+            width: 80%;
+            margin: 0 auto;
             position: relative;
-            background: white;
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-            width: calc(100% - 130px);
-            margin-left: calc(130px - 1px);
-            padding: 35px;
         }
-        .bp-card .bp-card_content h4 {
-            font-size: 40px;
-            margin: 0 140px 0 0;
-        }
-        .bp-card .bp-card_content p.secondary {
-            color: #ffaf96;
-            margin: 0;
-            padding-top: 10px;
-        }
-        .bp-card .bp-card_content ul {
-            list-style: none;
-            margin: 50px 0 0 0;
-            padding: 0;
-        }
-        .bp-card .bp-card_content ul span {
-            display: block;
-            color: #a8a8a8;
-        }
-        .bp-card .bp-card_content ul li {
-            padding: 0;
-            display: inline-block;
-            padding-right: 30px;
-        }
-        .bp-card .bp-card_content a.price {
-            color: #ffaf96;
-            text-decoration: none;
+        .bottom .bar--code::after {
+            content: "";
             position: absolute;
-            top: 35px;
-            right: 35px;
-            font-size: 36px;
-            background: rgba(255, 175, 150, 0.1);
-            padding: 10px;
-            border-radius: 3px;
+            width: 6px;
+            height: 100%;
+            background: #000;
+            top: 0;
+            left: 0;
+            box-shadow: 10px 0 #000, 30px 0 #000, 40px 0 #000, 67px 0 #000, 90px 0 #000, 100px 0 #000, 180px 0 #000, 165px 0 #000, 200px 0 #000, 210px 0 #000, 135px 0 #000, 120px 0 #000;
         }
-        @media only screen and (max-width: 600px) {
-            .bp-card {
-                position: relative;
-            }
-            .bp-card .bp-card_label {
-                top: 0;
-                left: 0;
-                bottom: 0;
-                width: calc(100% - 40px);
-                margin-left: 20px;
-                height: 120px;
-                position: relative;
-            }
-            .bp-card .bp-card_label:after, .bp-card .bp-card_label:before {
-                transform: rotate(90deg);
-                transform-origin: top left;
-                width: 126px;
-                top: -2px;
-            }
-            .bp-card .bp-card_label:after {
-                left: 80px;
-                right: auto;
-            }
-            .bp-card .bp-card_label:before {
-                left: auto;
-                right: -146px;
-            }
-            .bp-card .bp-card_label .bd-border_dotted {
-                width: 100%;
-                border-top: 4px dashed #f0f0f0;
-                border-right: none;
-                height: 4px;
-                top: 92px;
-                left: 0;
-            }
-            .bp-card .bp-card_label .bd-border_solid {
-                width: 80%;
-                background: #ffaf96;
-                height: 3px;
-                top: 45px;
-                left: 10%;
-            }
-            .bp-card .bp-card_content {
-                margin-left: 0;
-                width: 100%;
-                padding: 3% 5% 5% 5%;
-            }
-            .bp-card .bp-card_content h4 {
-                font-size: 32px;
-                margin: 0;
-            }
-            .bp-card .bp-card_content ul {
-                list-style: none;
-                margin: 20px 0 0 0;
-                padding: 0;
-            }
-            .bp-card .bp-card_content ul span {
-                display: block;
-                color: #a8a8a8;
-            }
-            .bp-card .bp-card_content ul li {
-                padding: 0;
-                display: inline-block;
-                width: 100%;
-                padding-right: 30px;
-                margin-bottom: 5px;
-            }
-            .bp-card .bp-card_content a.price {
-                position: relative;
-                width: 100%;
-                display: block;
-                margin: 0 auto;
-                top: auto;
-                right: auto;
-                margin-top: 20px;
-                text-align: center;
-            }
-            .bp-card .bp-card_content a.price:before {
-                content: '';
-                background: url('http://imgh.us/i-arrow.svg') center no-repeat;
-                background-size: contain;
-                position: absolute;
-                right: 22px;
-                top: 22px;
-                width: 20px;
-                height: 20px;
-            }
+        .bottom .bar--code::before {
+            content: "";
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background: #000;
+            top: 0;
+            left: 11px;
+            box-shadow: 12px 0 #000, -4px 0 #000, 45px 0 #000, 65px 0 #000, 72px 0 #000, 78px 0 #000, 97px 0 #000, 150px 0 #000, 165px 0 #000, 180px 0 #000, 135px 0 #000, 120px 0 #000;
+        } */
+        .info {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 10px;
+            font-size: 14px;
+            text-align: center;
+            z-index: 1;
+        }
+        .info a {
+            text-decoration: none;
+            color: #000;
+            background: #ffcc05;
         }
 
 
     </style>
 </head>
 <body>
-{{-- @dd($ticket) --}}
-<div class="container">
+    <div class="container">
 
-	<div class="bp-card" data-clickthrough="link">
-		<div class="bp-card_label">
-			<div class="bd-border_solid"></div>
-			<div class="bd-border_dotted"></div>
-		</div>
-		<div class="bp-card_content">
-			<p class="secondary">Ticket Pass</p>
-			<h4>{{ $ticket->program->title }}</h4>
+        <div class="ticket basic">
+            <p>Admit One</p>
+        </div>
 
+        <div class="ticket airline">
+            <div class="top">
+                <div class="title-wrapper">
+                    <h1>{{ $ticket->program->title }} PASS</h1>
+                </div>
+                {{-- <div class="big">
+                    <p class="from">GIB</p>
+                    <p class="to"><i class="fas fa-arrow-right"></i> TICKET</p>
+                </div> --}}
+                {{-- <div class="top--side">
+                    <i class="fas fa-plane"></i>
+                    <p>Baltimore</p>
+                    <p>San Diego</p>
+                </div> --}}
+            </div>
+            <div class="bottom">
+                <div class="column">
+                    <div class="row row-1">
+                        <p><span>Program</span>{{ $ticket->program->title }}</p>
+                        <p><span>Ticket UUID</span>{{ $ticket->ticket_uuid }}</p>
+                    </div>
+                    <div class="row row-2">
+                        <p><span>Program Start</span>{{ Carbon::parse($ticket->program->start_date)->isoFormat('D MMM, YY') }}</p>
+                        <p class="row--right"><span>Program End</span>{{ Carbon::parse($ticket->program->end_date)->isoFormat('D MMM, YY') }}</p>
+                        {{-- <p class="row--right"><span>Time</span>{{ $ticket->program->time }}</p> --}}
+                    </div>
+                    <div class="row row-2">
+                        <p><span>Costumer</span>{{ $ticket->user->name }}</p>
+                        {{-- <p class="row--center"><span>Seat</span>11E</p> --}}
+                        <p class="row--right"><span>Total Seat</span>{{ 1 }}</p>
+                    </div>
+                    <div class="row row-3">
+                        <p><span>Costumer</span>{{ $ticket->user->name }}</p>
+                        <p class="row--center"><span>Seat</span>11E</p>
+                        <p class="row--right"><span>Total Seat</span>{{ 1 }}</p>
+                    </div>
 
-			<ul>
-				<span>Including:</span>
-					<li>
-						Minimal 1
-					</li>
-					<li>
-						Minimal 1
-					</li>
-					<li>
-						Minimal 1
-					</li>
-			</ul>
+                </div>
+                <div class="bar--code"></div>
+            </div>
+        </div>
 
-
-		</div>
-	</div>
-
-</div>
-
+    </div>
 </body>
 </html>

@@ -7,46 +7,11 @@
     {{-- <script type="text/javascript"
     src="https://app.sandbox.midtrans.com/snap/snap.js"
     data-client-key="SET_YOUR_CLIENT_KEY_HERE"></script> --}}
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+    <script type="text/javascript" src="{{ config('midtrans.snap_url') }}" data-client-key="{{ config('midtrans.client_key') }}"></script>
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
 @endpush
 
 @section('content')
-    {{-- <div class="container">
-        <div class="flex justify-between items-center mb-4">
-        <h1 class="text-xl font-bold">Checkout</h1>
-        <hr class="border-t-2 border-gray-300">
-        </div>
-        <div class="mb-4">
-        <h3 class="text-lg font-bold mb-2">Order Details</h3>
-        <table class="w-full border-collapse">
-            <thead>
-            <tr>
-                <th class="py-2 px-3 bg-gray-200 border-b border-gray-400">Program Name</th>
-                <th class="py-2 px-3 bg-gray-200 border-b border-gray-400">Quantity</th>
-                <th class="py-2 px-3 bg-gray-200 border-b border-gray-400">Price</th>
-                <th class="py-2 px-3 bg-gray-200 border-b border-gray-400">Subtotal</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($order->orderDetails as $detail)
-                <tr>
-                <td class="py-2 px-3 border-b border-gray-400">{{ $detail->program->name }}</td>
-                <td class="py-2 px-3 border-b border-gray-400">{{ $detail->quantity }}</td>
-                <td class="py-2 px-3 border-b border-gray-400">{{ $detail->program->price }}</td>
-                <td class="py-2 px-3 border-b border-gray-400">{{ $detail->program->price * $detail->quantity }}</td>
-                </tr>
-            @endforeach
-            <tr>
-                <td colspan="3" class="py-2 px-3 text-right font-bold">Total</td>
-                <td class="py-2 px-3 font-bold">{{ $order->total_amount }}</td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
-        <button id="pay-button" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600">Pay Now</button>
-    </div> --}}
-
     <div class="w-screen">
         <section class="bg-slate-50 dark:bg-gray-900">
             <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md bg-white">
@@ -119,8 +84,39 @@
                         <textarea name="address" id="address" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                     </div>
 
-                    <div class="flex flex-col space-y-2 items-end">
-                        <span class="font-bold text-lg">Rp {{ number_format($total) }} | $ {{ number_format(($total / 15000)) }}<br></span>
+                    @php
+                        $totalPrice = 0;
+                    @endphp
+                    <div class="p-4 bg-green-200 rounded-lg">
+                        <div class="flex items-center text-center justify-center">
+                            <h3 class="text-lg font-semibold">Payment Details</h3>
+                        </div>
+                        <div class="bg-red-200 text-xs text-center text-red-600 p-1.5 rounded-sm mb-4">
+                            <p><span>* All payments are charged in Rupiah. Please note that currency conversion fees may apply.</span></p>
+                        </div>
+                        <div class="flex flex-col space-y-1 text-sm">
+                            <div class="flex justify-between">
+                                <span>Total Product Price</span>
+                                <span>Rp {{ number_format($total) }} | $ {{ number_format(($total / 15000)) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                @php
+                                    $percent = 3;
+                                    $fee = $total * ($percent / 100);
+                                    $totalPrice = $total + $fee;
+                                @endphp
+                                <span>Service Fee (*3%)</span>
+                                <span>Rp {{ number_format($fee) }} | $ {{ number_format(($fee / 15000)) }}</span>
+                                <!-- Add more rows for other payment details -->
+                            </div>
+                            {{-- <div class="mt-4 text-right">
+                                <span class="text-lg font-semibold">Total: Rp {{ number_format(($totalPrice)) }} | $ {{ number_format((($totalPrice) / 15000)) }}</span>
+                            </div> --}}
+                        </div>
+
+
+                    <div class="flex flex-col space-y-2 items-end border-t-2 border-green-950 mt-1.5 pt-1.5">
+                        <span class="font-bold text-lg">Rp {{ number_format($totalPrice) }} | $ {{ number_format(($totalPrice / 15000)) }}<br></span>
                         @if (isset($snapToken))
                             <button id="pay-button" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600">Pay Now</button>
                         @else

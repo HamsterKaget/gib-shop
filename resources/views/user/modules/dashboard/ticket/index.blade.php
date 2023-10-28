@@ -36,7 +36,7 @@
                             <td class="border px-4 py-2">{{ $t->program->title }}</td>
                             {{-- <td class="border px-4 py-2">{{ date_format(date_create($order->created_at),"D, d M Y, H:i:s e") }}</td> --}}
                             <td class="border px-4 py-2">
-                                <a href="{{ route('user-dashboard.ticket.view', ["uuid" => $t->ticket_uuid]) }}" class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded">
+                                <a target="_blank" href="{{ route('user-dashboard.ticket.view', ["uuid" => $t->ticket_uuid]) }}" class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded">
                                     <span class="text-sm">View Ticket</span>
                                 </a>
                             </td>
