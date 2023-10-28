@@ -1,18 +1,17 @@
-@extends('backend.layout')
+<?php $__env->startSection('title'); ?>
+    Tickets - Dashboard GIB
+<?php $__env->stopSection(); ?>
 
-@section('title')
-    Transactions - Dashboard GIB
-@endsection
+<?php $__env->startPush('post-css'); ?>
+    <script type="text/javascript" src="<?php echo e(config('midtrans.snap_url')); ?>" data-client-key="<?php echo e(config('midtrans.client_key')); ?>"></script>
+<?php $__env->stopPush(); ?>
 
-@push('post-css')
-    <script type="text/javascript" src="{{ config('midtrans.snap_url') }}" data-client-key="{{ config('midtrans.client_key') }}"></script>
-@endpush
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="p-4 pb-12 pt-20 sm:ml-72">
     <div class="my-4 text-center">
-        <h2 class="text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Transactions</h2>
-        <p class="text-lg max-w-4xl mx-auto font-normal text-gray-500 lg:text-xl dark:text-gray-400">View your Transaction History </p>
+        <h2 class="text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Tickets<span class="bg-red-100 text-red-800 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-800 ml-2">BETA</span></h2>
+
+        <p class="text-lg max-w-4xl mx-auto font-normal text-gray-500 lg:text-xl dark:text-gray-400">View your Ticket History </p>
     </div>
 
     <!-- Main App -->
@@ -30,7 +29,7 @@
                                 </svg>
                             </div>
                             <input type="search" id="default-search" class="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required>
-                            {{-- <button type="submit" class="text-white absolute right-1.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button> --}}
+                            
                             <button
                                 type="submit"
                                 class="text-white absolute right-1.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -40,79 +39,23 @@
                             </button>
                         </div>
                     </form>
-                    {{-- <div class="w-full mx-auto flex justify-end">
-                        <caption class="items-end text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                            <button data-modal-target="createModal" data-modal-toggle="createModal" type="button" class="relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                                <span class="relative px-3 py-1.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                    Tambah Data
-                                </span>
-                            </button>
-                        </caption>
-                    </div> --}}
+                    
                 </div>
-                <table class="w-full text-sm text-left text-gray-500 border-gray-200 border rounded-t-xl dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-gray-200 border dark:bg-gray-700 dark:text-gray-400">
-                        <tr class="text-center">
-                            <th scope="col" class="px-6 py-3" style="width: 10%">
-                                #
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 25%">
-                                Order Code
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 15%">
-                                Total Ammount
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 20%">
-                                Status
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 15%">
-                                Details
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 15%; min-width: 140px;">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
+               
                 <nav aria-label="Page navigation example" class="mt-6 pagination-nav">
-                    <ul class="inline-flex -space-x-px text-sm">
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                      </li>
-                      <li>
-                        <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-                      </li>
-                    </ul>
+
                 </nav>
             </div>
         </div>
 
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('post-js')
+<?php $__env->startPush('post-js'); ?>
 <script>
-    const assetUrl = @json(asset('storage/'));
+    const assetUrl = <?php echo json_encode(asset('storage/'), 15, 512) ?>;
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -121,7 +64,7 @@
 
 
     // Function to make the Axios request and append data to the table
-    function getData(params, pageUrl = "{{ route('user-dashboard.v2.transactions.getData') }}") {
+    function getData(params, pageUrl = "<?php echo e(route('user-dashboard.v2.transactions.getData')); ?>") {
         axios.get(pageUrl, {
             params: params
         })
@@ -239,4 +182,6 @@
         });
     }
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('backend.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/hamsterkaget/Development/Web-App/gib-shop/resources/views/backend/sections/user/ticket/index.blade.php ENDPATH**/ ?>

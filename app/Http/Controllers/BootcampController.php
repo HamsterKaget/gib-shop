@@ -15,25 +15,27 @@ class BootcampController extends Controller
         // $mini = Program::with(['Option.Value', 'Image'])->where('category_id', 2)->get();
         // $free = Program::with(['Option.Value', 'Image'])->where('category_id', 3)->get();
 
-        $main = Program::with(['Option.Value', 'Image'])
+        $main = Program::with(['Option.Value', 'Image', 'Discount'])
             ->where('category_id', 1)
             ->where('status', 'public')
             ->orderByDesc('featured')
-            ->orderBy('start_date')
+            ->orderBy('created_at')
             ->get();
+
+        // dd($main);
 
         $mini = Program::with(['Option.Value', 'Image'])
             ->where('category_id', 2)
             ->where('status', 'public')
             ->orderByDesc('featured')
-            ->orderBy('start_date')
+            ->orderBy('created_at')
             ->get();
 
         $free = Program::with(['Option.Value', 'Image'])
             ->where('category_id', 3)
             ->where('status', 'public')
             ->orderByDesc('featured')
-            ->orderBy('start_date')
+            ->orderBy('created_at')
             ->get();
 
         return view('user.modules.bootcamp.index', compact('main', 'mini', 'free'));
@@ -42,10 +44,14 @@ class BootcampController extends Controller
     public function home() {
         // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
         // $programs = Program::with(['Option.Value', 'Image'])->get();
-        $main = Program::with(['Option.Value', 'Image'])
+        $main = Program::with(['Option.Value', 'Image', 'Discount'])
             ->where('category_id', 1)
-            ->where('status', '!=', 'archived')
-        ->get();
+            ->where('status', 'public')
+            ->orderBy('featured')
+            ->orderBy('created_at')
+            ->get();
+
+        // dd($main);
 
         $mini = Program::with(['Option.Value', 'Image'])
             ->where('category_id', 2)

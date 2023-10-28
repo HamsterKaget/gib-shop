@@ -10,6 +10,9 @@
         <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
 
         <?php echo $__env->yieldPushContent('pre-css'); ?>
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         <?php echo $__env->yieldPushContent('post-css'); ?>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

@@ -4,6 +4,8 @@ use App\Http\Controllers\BootcampController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardTransactionController;
+use App\Http\Controllers\DashboardUserCertificateController;
+use App\Http\Controllers\DashboardUserTicketController;
 use App\Http\Controllers\DashboardUserTransactionController;
 use App\Http\Controllers\editProfileController;
 use App\Http\Controllers\MailController;
@@ -110,6 +112,16 @@ Route::name('user-dashboard.v2.')->prefix('/user-dashboard/v2')->middleware('aut
     Route::name('edit-profile.')->prefix('/edit-profile')->group(function () {
         Route::get('/', [editProfileController::class, 'index'])->name('index');
         Route::get('/getData', [editProfileController::class, 'getData'])->name('getData');
+    });
+
+    Route::name('ticket.')->prefix('/ticket')->group(function () {
+        Route::get('/', [DashboardUserTicketController::class, 'index'])->name('index');
+        Route::get('/getData', [DashboardUserTicketController::class, 'getData'])->name('getData');
+    });
+
+    Route::name('certificates.')->prefix('/certificates')->group(function () {
+        Route::get('/', [DashboardUserCertificateController::class, 'index'])->name('index');
+        Route::get('/getData', [DashboardUserCertificateController::class, 'getData'])->name('getData');
     });
 
 });

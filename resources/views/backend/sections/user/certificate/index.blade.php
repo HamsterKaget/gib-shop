@@ -1,7 +1,7 @@
 @extends('backend.layout')
 
 @section('title')
-    Transactions - Dashboard GIB
+    Certificate - Dashboard GIB
 @endsection
 
 @push('post-css')
@@ -11,8 +11,8 @@
 @section('content')
 <div class="p-4 pb-12 pt-20 sm:ml-72">
     <div class="my-4 text-center">
-        <h2 class="text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Transactions</h2>
-        <p class="text-lg max-w-4xl mx-auto font-normal text-gray-500 lg:text-xl dark:text-gray-400">View your Transaction History </p>
+        <h2 class="text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Certificate</h2>
+        <p class="text-lg max-w-4xl mx-auto font-normal text-gray-500 lg:text-xl dark:text-gray-400">View your Certificate </p>
     </div>
 
     <!-- Main App -->
@@ -50,57 +50,12 @@
                         </caption>
                     </div> --}}
                 </div>
-                <table class="w-full text-sm text-left text-gray-500 border-gray-200 border rounded-t-xl dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-gray-200 border dark:bg-gray-700 dark:text-gray-400">
-                        <tr class="text-center">
-                            <th scope="col" class="px-6 py-3" style="width: 10%">
-                                #
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 25%">
-                                Order Code
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 15%">
-                                Total Ammount
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 20%">
-                                Status
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 15%">
-                                Details
-                            </th>
-                            <th scope="col" class="px-6 py-3" style="width: 15%; min-width: 140px;">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+               <div class="w-full p-4 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
 
-                    </tbody>
-                </table>
+
+               </div>
                 <nav aria-label="Page navigation example" class="mt-6 pagination-nav">
-                    <ul class="inline-flex -space-x-px text-sm">
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                      </li>
-                      <li>
-                        <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                      </li>
-                      <li>
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-                      </li>
-                    </ul>
+
                 </nav>
             </div>
         </div>
@@ -121,7 +76,7 @@
 
 
     // Function to make the Axios request and append data to the table
-    function getData(params, pageUrl = "{{ route('user-dashboard.v2.transactions.getData') }}") {
+    function getData(params, pageUrl = "{{ route('user-dashboard.v2.certificates.getData') }}") {
         axios.get(pageUrl, {
             params: params
         })

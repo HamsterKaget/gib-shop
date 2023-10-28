@@ -104,21 +104,67 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                                         <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
                                             <i class="fa-solid fa-cube"></i>
                                             <span class="ml-1.5">
-                                                <?php echo e(number_format($program->stock)); ?>
-
+                                                <?php echo e(number_format($program->stock)); ?> Left
                                             </span>
                                         </span>
                                         
-                                            <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                                <i class="fa-solid fa-tags"></i>
-                                                <span class="ml-1.5">
-                                                    Rp <?php echo e(number_format($program->price)); ?>
+                                        <?php
+                                            $price = $program->price;
 
-                                                    /
-                                                    $ <?php echo e(number_format(($program->price / 15000))); ?>
+                                            if (isset($program->Discount[0])) {
+                                                $discountedPrice = $program->Discount[0]->discount; // Initialize with the original price
+                                                $discountPercentage = $program->Discount[0]->percent; // Initialize with the original price
+                                            //     // dd($program->Discount);
+                                            //     $discountPercentage = $program->Discount[0]->discount; // Assuming you have the discount percentage
+                                            //     if ($discountPercentage) {
+                                            //         // Ensure the discount percentage is between 0 and 1 (e.g., 0.1 for 10%)
+                                            //         // dd('ada');
+                                            //         $discountedPrice = $price - ($price * ($discountPercentage / 100));
+                                            //     }
+                                            }
+                                        ?>
+                                            <?php if(isset($program->Discount[0])): ?>
+                                                <span class="bg-red-100 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-red-700 dark:text-red-400 border border-gray-500">
+                                                    <i class="fa-solid fa-tags"></i>
+                                                    <span class="ml-1.5">
+                                                        Rp <?php echo e(number_format($discountedPrice)); ?>
 
+                                                        /
+                                                        $ <?php echo e(number_format(($discountedPrice / 15000))); ?>
+
+                                                    </span>
                                                 </span>
-                                            </span>
+                                                <span class="bg-red-100 mt-1 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-red-700 dark:text-red-400 border border-gray-500">
+                                                    
+                                                    <svg class="w-3 h-3 my-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M18.435 7.546A2.32 2.32 0 0 1 17.7 5.77a3.354 3.354 0 0 0-3.47-3.47 2.322 2.322 0 0 1-1.776-.736 3.357 3.357 0 0 0-4.907 0 2.281 2.281 0 0 1-1.776.736 3.414 3.414 0 0 0-2.489.981 3.372 3.372 0 0 0-.982 2.49 2.319 2.319 0 0 1-.736 1.775 3.36 3.36 0 0 0 0 4.908A2.317 2.317 0 0 1 2.3 14.23a3.356 3.356 0 0 0 3.47 3.47 2.318 2.318 0 0 1 1.777.737 3.36 3.36 0 0 0 4.907 0 2.36 2.36 0 0 1 1.776-.737 3.356 3.356 0 0 0 3.469-3.47 2.319 2.319 0 0 1 .736-1.775 3.359 3.359 0 0 0 0-4.908ZM8.5 5.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm3 9.063a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm2.207-6.856-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 1.414Z"/>
+                                                    </svg>
+                                                    <span class="ml-0.5">
+                                                        Discount <?php echo e(number_format($discountPercentage)); ?>%
+                                                    </span>
+                                                </span>
+                                                <span class="opacity-60 line-through bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                                    <i class="fa-solid fa-tags"></i>
+                                                    <span class="ml-1.5">
+                                                        Rp <?php echo e(number_format($program->price)); ?>
+
+                                                        /
+                                                        $ <?php echo e(number_format(($program->price / 15000))); ?>
+
+                                                    </span>
+                                                </span>
+                                                <?php else: ?>
+                                                <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                                                    <i class="fa-solid fa-tags"></i>
+                                                    <span class="ml-1.5">
+                                                        Rp <?php echo e(number_format($program->price)); ?>
+
+                                                        /
+                                                        $ <?php echo e(number_format(($program->price / 15000))); ?>
+
+                                                    </span>
+                                                </span>
+                                            <?php endif; ?>
                                             
                                         
                                     </div>

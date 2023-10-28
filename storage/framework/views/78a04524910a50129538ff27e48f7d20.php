@@ -56,7 +56,7 @@
                                 Status
                             </th>
                             <th scope="col" class="px-6 py-3" style="width: 15%">
-                                Expired
+                                Details
                             </th>
                             <th scope="col" class="px-6 py-3" style="width: 15%; min-width: 140px;">
                                 Action

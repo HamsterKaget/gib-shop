@@ -76,7 +76,7 @@ class CartController extends Controller
     public function getData(Request $request)
     {
         // Get the cart details for the logged-in user
-        $cart = Cart::where('user_id', Auth::id())->with('Details.Program', 'Details.Options.OptionValue')->first();
+        $cart = Cart::where('user_id', Auth::id())->with('Details.Program.Discount', 'Details.Options.OptionValue')->first();
 
         // Create an associative array to group details by program_id
         $groupedDetails = [];

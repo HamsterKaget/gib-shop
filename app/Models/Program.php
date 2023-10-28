@@ -42,4 +42,14 @@ class Program extends Model
     public function Option() {
         return $this->hasMany(ProgramOption::class, 'program_id');
     }
+
+    public function Discount() {
+        return $this->hasMany(discount::class, 'program_id');
+    }
+
+    public function Order() {
+        return $this->hasMany(OrderDetails::class, 'program_id');
+    }
+
+
 }
