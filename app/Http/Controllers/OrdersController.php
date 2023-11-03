@@ -49,6 +49,7 @@ class OrdersController extends Controller
         // Calculate the total amount to be paid
         $totalAmount = 0;
         $totalDiscount = 0; // Initialize the total discount
+        $itemDetails = [];
 
         foreach ($programDetails as $programDetail) {
             $program = $programDetail->Program()->first();
@@ -57,16 +58,10 @@ class OrdersController extends Controller
             // Check if there is a discount for this program
             if ($program->discount && count($program->discount) > 0) {
                 $discount = $program->discount[0];
-                // if ($discount->percent) {
-                //     // Calculate the discount based on a percentage
-                //     $discountAmount = ($discount->percent / 100) * $itemPrice;
-                // } else {
-                    // Use the fixed discount amount
-                    $discountAmount = $discount->discount * $programDetail->quantity;
-                // }
+                $discountAmount = $discount->discount * $programDetail->quantity;
 
                 // Deduct the discount amount from the item price
-                $itemPrice -= $itemPrice - $discountAmount;
+                $itemPrice -= $discountAmount;
 
                 // Add the discount to the total discount
                 $totalDiscount += $discountAmount;
@@ -81,20 +76,20 @@ class OrdersController extends Controller
                 'quantity' => $programDetail->quantity,
                 'name' => $program->title,
             ];
-
-            $itemPrice = 0;
         }
+
+        // dd($totalAmount, $discountAmount);
+
+        // dd($discountAmount);
         // Calculate the total amount to be paid after discounts
         $itemDetails[] = [
             'id' => 'fee',
-            'price' => $totalAmount * 0.03,
+            'price' => round($totalAmount * 0.03),
             'quantity' => 1,
             'name' => 'Payment Fee',
         ];
 
         $totalAmount += round($totalAmount * 0.03); // Adding 3% to the totalAmount
-
-
 
         // Create an order record
         $order = Orders::create([

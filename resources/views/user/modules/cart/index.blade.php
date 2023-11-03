@@ -217,10 +217,9 @@
                         </tr>
                     `;
 
-                    // Initialize total variable
+                   // Initialize total variable
                     let total = 0;
                     let totalDiscount = 0; // Initialize the total discount
-
 
                     // Loop through cart details
                     data.Details.forEach((detail, i) => {
@@ -264,6 +263,15 @@
                         total += detail.program.price * detail.quantity;
                     });
 
+                    // console.log(total - totalDiscount + );
+                    const discountText = totalDiscount > 0 ? `- Rp ${numberFormat(totalDiscount)}` : "- Rp 0"; // Check if totalDiscount is greater than 0
+                    const pfee = (total - totalDiscount) * 0.03;
+                    const sfee = total * 0.005 + 2000; // Adjust this value if needed
+                    const totalAll = total - totalDiscount + pfee + 0;
+
+                    // Now you can use the 'totalAll' variable for the total price including discounts and fees
+
+
                     // product total
                     const productRow = document.createElement("tr");
                     productRow.innerHTML = `
@@ -285,13 +293,12 @@
                             <span class="text-red-700">*</span> Total Discount
                         </td>
                         <td style="padding: 2px;"></td>
-                        <td style="padding: 2px;" class="text-red-500 italic">- Rp ${numberFormat(total - totalDiscount)}</td>
+                        <td style="padding: 2px;" class="text-red-500 italic">${discountText}</td>
                         <td style="padding: 2px;"></td>
                     `;
                     tfoot.appendChild(discountRow);
 
                     // Payment Fee Row
-                    const pfee = (total - (total - totalDiscount)) * 0.03;
                     const paymentFeeRow = document.createElement("tr");
                     paymentFeeRow.innerHTML = `
                         <td style="padding: 2px;"></td>
@@ -305,7 +312,6 @@
                     tfoot.appendChild(paymentFeeRow);
 
                     // Service Fee Row
-                    const sfee = total * 0.005 + 2000; // Adjust this value if needed
                     const serviceFeeRow = document.createElement("tr");
                     serviceFeeRow.innerHTML = `
                         <td style="padding: 2px;"></td>
@@ -322,7 +328,6 @@
                     tfoot.appendChild(serviceFeeRow);
 
                     // Total All Row
-                    const totalAll = total + pfee + 0;
                     const totalAllRow = document.createElement("tr");
                     totalAllRow.classList.add("border-y","border-y-gray-400","border-b-black","font-medium");
                     totalAllRow.style.marginTop = 8;
@@ -331,7 +336,7 @@
                         <td style="padding: 10px 6px;"></td>
                         <td style="padding: 10px 6px;" class="text-gray-500 italic">Total</td>
                         <td style="padding: 10px 6px;"></td>
-                        <td style="padding: 10px 6px;" class="text-gray-500 italic">Rp ${numberFormat(totalAll - (total - totalDiscount))}</td>
+                        <td style="padding: 10px 6px;" class="text-gray-500 italic">Rp ${numberFormat(totalAll)}</td>
                         <td style="padding: 10px 6px;"></td>
                     `;
                     tfoot.appendChild(totalAllRow);
