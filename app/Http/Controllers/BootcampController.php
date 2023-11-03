@@ -9,6 +9,10 @@ use Illuminate\Support\Str;
 class BootcampController extends Controller
 {
 
+    public function mnt() {
+        return view('maintenence.index');
+    }
+
     public function index() {
         // get all data from Program::class with the relation ["Option.Value"] where caretegory_id = 1
         // $main = Program::with(['Option.Value', 'Image'])->where('category_id', 1)->get();
