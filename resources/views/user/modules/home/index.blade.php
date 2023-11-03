@@ -98,7 +98,7 @@
                                         @else
                                             @if (isset($program->Discount[0]))
                                                 <span class="font-bold text-base">
-                                                    Rp. {{ number_format($discountedPrice) }} / $ {{ number_format(($discountedPrice / 15000)) }}
+                                                    Rp. {{ number_format($program->price - $discountedPrice) }} / $ {{ number_format((($program->price - $discountedPrice) / 15000)) }}
                                                 </span>
                                                 <span class="flex justify-start items-center">
                                                     <span class="text-slate-400 line-through block text-xs">

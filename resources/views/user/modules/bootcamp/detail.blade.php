@@ -141,9 +141,9 @@ href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
                                                 <span class="bg-red-100 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-red-700 dark:text-red-400 border border-gray-500">
                                                     <i class="fa-solid fa-tags"></i>
                                                     <span class="ml-1.5">
-                                                        Rp {{ number_format($discountedPrice) }}
+                                                        Rp {{ number_format($program->price - $discountedPrice) }}
                                                         /
-                                                        $ {{ number_format(($discountedPrice / 15000)) }}
+                                                        $ {{ number_format((($program->price - $discountedPrice) / 15000)) }}
                                                     </span>
                                                 </span>
                                                 <span class="bg-red-100 mt-1 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-red-700 dark:text-red-400 border border-gray-500">

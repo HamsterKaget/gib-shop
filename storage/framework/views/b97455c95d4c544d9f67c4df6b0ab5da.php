@@ -82,7 +82,7 @@
                                         <?php else: ?>
                                             <?php if(isset($program->Discount[0])): ?>
                                                 <span class="font-bold text-base">
-                                                    Rp. <?php echo e(number_format($discountedPrice)); ?> / $ <?php echo e(number_format(($discountedPrice / 15000))); ?>
+                                                    Rp. <?php echo e(number_format($program->price - $discountedPrice)); ?> / $ <?php echo e(number_format((($program->price - $discountedPrice) / 15000))); ?>
 
                                                 </span>
                                                 <span class="flex justify-start items-center">

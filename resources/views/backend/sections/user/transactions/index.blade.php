@@ -119,6 +119,15 @@
 <script>
 
 
+        // Function to check if an item is expired (created more than 1 day ago)
+        function isExpired(created_at) {
+            const today = new Date();
+            const createdDate = new Date(created_at);
+            const oneDayInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+            // console.log(today - createdDate > oneDayInMillis)
+            return today - createdDate > oneDayInMillis;
+        }
+
 
     // Function to make the Axios request and append data to the table
     function getData(params, pageUrl = "{{ route('user-dashboard.v2.transactions.getData') }}") {
@@ -134,6 +143,7 @@
                 const tbody = document.querySelector('table tbody');
                 tbody.innerHTML = '';
                 let i = 0;
+                // Function to check if an item is expired
 
                 // Create a template for a table row using a template literal
                 const rowTemplate = (item) => `
@@ -145,23 +155,32 @@
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"></td>
                         <td class="px-6 py-4 text-center">
                         ${
-                            item.status.toLowerCase() === 'pending'
+                            item.status && item.status.toLowerCase() === 'pending' && isExpired(item.created_at)
+                                ? `
+                                    <button class="border-gray-500 border-2 text-gray-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
+                                        <span class="text-sm">Expired</span>
+                                    </button>`
+                                : item.status && item.status.toLowerCase() === 'pending'
                                 ? `
                                     <button class="bg-green-500 border-green-500 border-2 text-white py-1 px-3 w-full rounded" onclick="makePayment('${item.snaptoken}')">
                                         <span class="text-sm">Pay Now</span>
                                     </button>`
-                                : item.status.toLowerCase() === 'success'
+                                : item.status && item.status.toLowerCase() === 'success'
                                 ? `
                                     <button class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
                                         <span class="text-sm">Paid</span>
                                     </button>`
-                                : item.status.toLowerCase() === 'failed'
+                                : item.status && item.status.toLowerCase() === 'failed'
                                 ? `
                                     <button class="border-red-500 border-2 text-red-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
                                         <span class="text-sm">Failed</span>
                                     </button>`
                                 : ''
                         }
+
+
+
+
                         </td>
                     </tr>
                 `;
