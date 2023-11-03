@@ -1,6 +1,4 @@
-@extends('admin.layouts.base')
-
-@push('css')
+<?php $__env->startPush('css'); ?>
     <style>
     .ck-editor__editable_inline {
         min-height: 200px;
@@ -9,26 +7,26 @@
 
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
 
-@endpush
-@section('title')
+<?php $__env->stopPush(); ?>
+<?php $__env->startSection('title'); ?>
     Manage Event - Dashboard
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="w-full min-h-screen shadow-lg rounded-lg p-4">
         <div class="bg-white shadow-lg rounded-lg p-4">
             <h2 class="text-lg font-medium mb-4">Summary</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
                     <p class="text-sm font-medium text-gray-600">Total Open Events</p>
-                    <p class="text-lg font-bold text-gray-900">{{ $total }}</p>
+                    <p class="text-lg font-bold text-gray-900"><?php echo e($total); ?></p>
                 </div>
                 <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
                     <p class="text-sm font-medium text-gray-600">Total Closed Events</p>
-                    <p class="text-lg font-bold text-gray-900">{{ $total }}</p>
+                    <p class="text-lg font-bold text-gray-900"><?php echo e($total); ?></p>
                 </div>
                 <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
                     <p class="text-sm font-medium text-gray-600">Total Events</p>
-                    <p class="text-lg font-bold text-gray-900">{{ $total }}</p>
+                    <p class="text-lg font-bold text-gray-900"><?php echo e($total); ?></p>
                 </div>
             </div>
         </div>
@@ -50,96 +48,21 @@
                         <th class="border px-4 py-2">Thumbnail</th>
                         <th class="border px-4 py-2">Title</th>
                         <th class="border px-4 py-2">Description</th>
-                        {{-- <th class="border px-4 py-2">Date</th> --}}
+                        
                         <th class="border px-4 py-2">Location & Time</th>
-                        {{-- <th class="border px-4 py-2">Time</th> --}}
+                        
                         <th class="border px-4 py-2">Price & Stock</th>
-                        {{-- <th class="border px-4 py-2">Stock</th> --}}
+                        
                         <th class="border px-4 py-2">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @php
-                        $i = 0;
-                    @endphp
-                    @foreach ($programs as $program)
-                        <tr class="text-center">
-                            <td class="border px-4 py-2">{{ ++$i }}</td>
-                            <td class="border px-4 py-2">
-                                @if (Str::startsWith($program->thumbnail, 'images/produk/'))
-                                    <img src="{{ Storage::url($program->thumbnail) }}" alt="thumbnail" class="max-h-36">
-                                @else
-                                    <img src="{{ asset($program->thumbnail) }}" alt="thumbnail" class="max-h-36">
-                                @endif
-                            </td>
-                            <td class="border px-4 py-2 text-sm max-w-[200px]">{{ $program->title }}</td>
-                            <td class="border px-4 py-2">
-                                <button onclick="showDescriptionModal(this)" data-json="{{ json_encode($program) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white py-1.5 px-3 rounded flex items-center justify-center mx-auto shadow-lg">
-                                    <i class="fa-solid fa-eye fa-2xs"></i><span class="text-xs ml-2">See Description</span>
-                                </button>
-                            </td>
-
-                            <td class="border px-4 py-2">
-                                <div class="flex items-center justify-center flex-col space-y-2">
-                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span class="ml-1.5">
-                                            {{ $program->location }}
-                                        </span>
-                                    </span>
-                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                        <i class="fa-solid fa-calendar"></i>
-                                        <span class="ml-1.5">
-                                            {{ date_format(date_create($program->start_date),"D, d M Y"); }}
-                                        </span>
-                                    </span>
-                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                        <i class="fa-solid fa-calendar"></i>
-                                        <span class="ml-1.5">
-                                            {{ date_format(date_create($program->end_date),"D, d M Y"); }}
-                                        </span>
-                                    </span>
-                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                        <i class="fa-solid fa-clock"></i>
-                                        <span class="ml-1.5">
-                                            {{ $program->time }} </td>
-                                        </span>
-                                    </span>
-                                </div>
-                            <td class="border px-4 py-2">
-                                <div class="flex items-center justify-center flex-col space-y-2">
-                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                        <i class="fa-solid fa-cube"></i>
-                                        <span class="ml-1.5">
-                                            {{ number_format($program->stock) }}
-                                        </span>
-                                    </span>
-                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                        <i class="fa-solid fa-tag"></i>
-                                        <span class="ml-1.5">
-                                            {{ $program->price != 0 ? number_format($program->price) : "Free" }}
-                                        </span>
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="border px-4 py-2">
-                                <div class="flex">
-                                    <button onclick="editAction(this)" data-json="{{ json_encode($program) }}" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">
-                                        <i class="fa-solid fa-pen-to-square fa-sm"></i>
-                                    </button>
-
-                                    <button class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded ml-2" onclick="deleteData({{ $program->id }})">
-                                        <i class="fa-solid fa-trash fa-sm"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach --}}
+                    
                 </tbody>
             </table>
 
             <div id="pagination"></div>
-            {{-- {{ $programs->links() }} --}}
+            
         </div>
     </div>
 
@@ -160,10 +83,10 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
-                    {{-- make me form in this div for creating new user in laravel --}}
-                    <form id="user-form" action="{{ route('dashboard.manage-event.store') }}" method="POST"
+                    
+                    <form id="user-form" action="<?php echo e(route('dashboard.manage-event.store')); ?>" method="POST"
                     onsubmit="createOrUpdate(this, event)" enctype="multipart/form-data">
-                        @csrf
+                        <?php echo csrf_field(); ?>
                         <input type="hidden" name="id">
                         <input type="hidden" name="_method">
                         <div class="mb-6">
@@ -237,10 +160,9 @@
                     </form>
                 </div>
                 <!-- Modal footer -->
-                {{-- <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600"> --}}
-                    {{-- <button data-modal-hide="defaultModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                    <button data-modal-hide="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button> --}}
-                {{-- </div> --}}
+                
+                    
+                
             </div>
         </div>
     </div>
@@ -262,7 +184,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
-                    {{-- add like flex with one logo check and succes message, make all the elment is centered --}}
+                    
                     <div id="description_event">
 
                     </div>
@@ -288,7 +210,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
-                    {{-- add like flex with one logo check and succes message, make all the elment is centered --}}
+                    
                     <div class="flex flex-col items-center justify-center h-full">
                         <div class="rounded-full bg-green-500 p-4">
                             <svg class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -336,18 +258,16 @@
     </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('script')
-{{-- <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script> --}}
+<?php $__env->startPush('script'); ?>
+
 <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.min.js"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script> --}}
-
 
 <script>
         const table = {
-            baseURL: `{{ route('dashboard.manage-event.table') }}`,
+            baseURL: `<?php echo e(route('dashboard.manage-event.table')); ?>`,
             element: $('#tableData'),
             pagination: $('#pagination'),
             setLoadingState() {
@@ -473,7 +393,8 @@
                     url: this.baseURL,
                     method: 'GET',
                     // params: {
-                    //     id: {{ Auth::user()->sekolah_id }}
+                    //     id: <?php echo e(Auth::user()->sekolah_id); ?>
+
                     // }
                 })
                 .then(resultJson => {
@@ -596,7 +517,7 @@
         // !======================================! //
         $form = $(form);
 
-        let url = `{{ route('dashboard.manage-event.store') }}`;
+        let url = `<?php echo e(route('dashboard.manage-event.store')); ?>`;
         let method = $form.find('[name="_method"]').val();
 
         try {
@@ -674,7 +595,9 @@
         }
     }
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
 
 
+
+<?php echo $__env->make('admin.layouts.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/hamsterkaget/Development/Web-App/gib-shop/resources/views/admin/modules/manage-event/index.blade.php ENDPATH**/ ?>
