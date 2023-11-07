@@ -35,7 +35,7 @@
                     <div class="flex flex-col justify-end text-slate-500 text-xs text-right">
                         <h3>GatheringInBali</h3>
                         <h3>PaymentID / Invoice #<?php echo e($order->uuid); ?></h3>
-                        <h3>November 05 2023</h3>
+                        <h3><?php echo e(now()->format('D, d F Y')); ?></h3>
                     </div>
                 </div>
 
@@ -115,9 +115,9 @@
             </div>
         </section>
 
-<script>
-    window.print();
-</script>
+        <script>
+            window.print();
+        </script>
       </body>
 </html>
 <?php /**PATH /home/hamsterkaget/Development/Web-App/gib-shop/resources/views/mail/invoice.blade.php ENDPATH**/ ?>

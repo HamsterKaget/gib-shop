@@ -109,6 +109,10 @@
     </div>
 </section>
 
+
+<script>
+    window.print();
+</script>
       </body>
 </html>
 <?php /**PATH /home/hamsterkaget/Development/Web-App/gib-shop/resources/views/mail/ticket.blade.php ENDPATH**/ ?>

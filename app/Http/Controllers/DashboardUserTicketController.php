@@ -31,7 +31,7 @@ class DashboardUserTicketController extends Controller
 
         $data = $query->orderBy('updated_at', 'desc')
                      ->orderBy('created_at', 'desc')
-                     ->paginate(7);
+                     ->paginate(10);
 
         return response()->json($data, 200);
     }
