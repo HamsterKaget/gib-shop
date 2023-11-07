@@ -157,9 +157,18 @@
                                     </button>`
                                 : item.status && item.status.toLowerCase() === 'success'
                                 ? `
-                                    <button class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
-                                        <span class="text-sm">Paid</span>
-                                    </button>`
+                                    <div class=" grid grid-cols-2 gap-1">
+                                        <button class="border-green-500 border-2 text-green-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>
+                                            <span class="text-sm">Paid</span>
+                                        </button>
+                                        <a href="<?php echo e(route('invoice')); ?>?uuid=${item.uuid}" class="border-blue-500 border-2 text-blue-500 py-1 px-3 w-full rounded flex justify-center items-center" disabled>
+                                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
+                                            </svg>
+                                            <span class="text-sm ml-1">Invoice</span>
+                                        </a>
+                                    </div>
+                                    `
                                 : item.status && item.status.toLowerCase() === 'failed'
                                 ? `
                                     <button class="border-red-500 border-2 text-red-500 py-1 px-3 w-full rounded cursor-not-allowed" disabled>

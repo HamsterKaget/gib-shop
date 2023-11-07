@@ -36,6 +36,7 @@ use Illuminate\Http\Request;
  *
  */
 Route::get('/', function () { return redirect('/home');});
+// Route::get('/invoice', function () { return redirect('/home');});
 Route::get('/home', [BootcampController::class, 'home'])->name('home');
 // Route::get('/mail', [MailController::class, 'index'])->name('index');
 
@@ -88,6 +89,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/checkout', [OrdersController::class, 'index'])->name('checkout.index');
     Route::get('/checkout', [OrdersController::class, 'index'])->name('checkout.index');
     Route::post('/checkout/pay', [OrdersController::class, 'checkout'])->name('checkout.pay');
+
+    Route::get('/invoice', [OrdersController::class, 'invoice'])->name('invoice');
+    Route::get('/ticket', [OrdersController::class, 'ticket'])->name('ticket-new');
+    Route::get('/sendTicket', [OrdersController::class, 'sendTicket'])->name('ticket-send');
+    Route::get('/ticketPdf', [OrdersController::class, 'ticketPdf'])->name('ticket-pdf');
     // Route::get('/cart/store', [CartController::class, 'store'])->name('cart.store');
 
     //! Route Dashboard User

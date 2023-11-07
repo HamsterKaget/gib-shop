@@ -22,16 +22,16 @@ class DashboardUserTicketController extends Controller
 
     public function getData(Request $request)
     {
-        $query = Ticket::with(["orderDetails.orderDetailOptions.optionValue.Option", "orderDetails.program"])->where('user_id', Auth::user()->id)->query();
-
+        $query = Ticket::with(["user", "program", "order"])
+            ->where('user_id', Auth::user()->id);
 
         // if ($request->search) {
         //     $query->where('name', 'LIKE', "%" . $request->search . "%");
         // }
 
-        $data = $query->orderBy('updated_at', 'desc') // Order by updated_at in descending order
-                    ->orderBy('created_at', 'desc') // Then order by created_at in descending order
-                    ->paginate(7);
+        $data = $query->orderBy('updated_at', 'desc')
+                     ->orderBy('created_at', 'desc')
+                     ->paginate(7);
 
         return response()->json($data, 200);
     }

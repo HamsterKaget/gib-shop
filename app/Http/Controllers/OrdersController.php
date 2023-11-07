@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InvoiceMail;
 use App\Mail\ticketConfirmation;
+use App\Mail\TicketMail;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Order;
@@ -19,6 +21,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use PSpell\Config;
+use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\File;
+
 
 class OrdersController extends Controller
 {
@@ -103,10 +108,38 @@ class OrdersController extends Controller
             'total_amount_paid' => $totalAmount,
         ]);
 
+        // Initialize an array to store the order details
+        $orderDetails = [];
 
-        // dd($totalAmount, $itemDetails);
-        // return;
+        foreach ($programDetails as $programDetail) {
+            $program = $programDetail->Program()->first();
+            $itemPrice = $program->price * $programDetail->quantity;
 
+            // Check if there is a discount for this program
+            if ($program->discount && count($program->discount) > 0) {
+                $discount = $program->discount[0];
+                $discountAmount = $discount->discount * $programDetail->quantity;
+
+                // Deduct the discount amount from the item price
+                $itemPrice -= $discountAmount;
+
+                // Add the discount to the total discount
+                $totalDiscount += $discountAmount;
+            }
+
+            $totalAmount += $itemPrice;
+
+            // Create a new OrderDetails instance for this program
+            $orderDetail = new OrderDetails([
+                'order_id' => $order->id, // Assuming order_id is the foreign key to the orders table
+                'program_id' => $program->id, // Assuming program_id is the foreign key to the programs table
+                'quantity' => $programDetail->quantity,
+                'total' => $itemPrice,
+            ]);
+
+            // Save the order detail to the database
+            $orderDetail->save();
+        }
 
         // Use the created order ID in the transaction details parameter
         $params = array(
@@ -334,9 +367,11 @@ class OrdersController extends Controller
         if ($statusCode == '200') {
             // TODO: update the order status and other relevant information
             $order = Orders::with(["orderDetails.orderDetailOptions.optionValue.Option", "orderDetails.program"])->where('id', $orderId)->first();
+            $user = User::find($order->user_id);
 
             if($request->status_code == 200) {
                 $order->status = "Success";
+                Mail::to($user->email)->send(new InvoiceMail($order));
 
                 $i = 1;
 
@@ -348,10 +383,11 @@ class OrdersController extends Controller
                         "program_id" => $orderDetail->program_id,
                         "order_id" => $orderDetail->order_id,
                         "user_id" => $order->user_id,
+                        "status" => 'UNUSED',
                     ]);
                     // Send email confirmation to the user with the ticket UUID
-                    $user = User::find($order->user_id);
-                    Mail::to($user->email)->send(new ticketConfirmation($ticket));
+                    Mail::to($user->email)->send(new TicketMail($ticket));
+
                 }
 
 
@@ -377,6 +413,68 @@ class OrdersController extends Controller
             return response('Payment failed', 200);
         }
     }
+
+    public function invoice(Request $request) {
+        // Retrieve the UUID from the query parameter
+        $uuid = $request->query('uuid');
+
+        // Assuming you have an Eloquent model for your orders, fetch the data based on the UUID
+        $order = Orders::with(["user", "orderDetails.program.Discount"])->where('uuid', $uuid)->first();
+        // return new InvoiceMail($order);
+        // Mail::to('radjaauliaalramdani@gmail.com')->send(new InvoiceMail($order));
+
+        // dd($order);
+
+        if ($order) {
+            return view("mail.invoice", ['order' => $order]);
+        } else {
+            return view("error.invoice_not_found");
+            // Handle the case where the order with the specified UUID was not found
+        }
+    }
+
+
+    public function ticket(Request $request) {
+        $uuid = $request->query('uuid');
+
+        $ticket = Ticket::with(["user", "program", "order"])->where('ticket_uuid', $uuid)->first();
+        // return new TicketMail($ticket);
+        // Mail::to('radjaauliaalramdani@gmail.com')->send(new TicketMail($ticket));
+
+        // dd($ticket);
+
+        if ($ticket) {
+            return view("mail.ticket", ['ticket' => $ticket]);
+        } else {
+            return view("error.invoice_not_found");
+            // Handle the case where the order with the specified UUID was not found
+        }
+    }
+
+    // public function sendTicket() {
+    //     // return new TicketMail();
+    //     Mail::to('radjaauliaalramdani@gmail.com')->send(new TicketMail());
+    // }
+
+
+    // public function ticketPdf()
+    // {
+    //     $url = route('ticket-new'); // Replace with your ticket page URL
+
+    //     $pdfPath = public_path('ticket/ticket.pdf'); // Define the path to save the PDF
+
+    //     Browsershot::url($url)
+    //         // ->setNodeBinary('/usr/bin/node') // Path to Node.js binary (if not in PATH)
+    //         // ->setNpmBinary('/usr/local/bin/npm') // Path to npm binary (if not in PATH)
+    //         ->setScreenshotType('pdf')
+    //         ->save($pdfPath);
+
+    //     return response()->file($pdfPath, ['Content-Disposition' => 'inline; filename="ticket.pdf"']);
+    // }
+
+    // public function ticketPdf() {
+    //     Browsershot::url(route('ticket-new'))->save('example.pdf');
+    // }
 
 
 
