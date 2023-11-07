@@ -16,6 +16,7 @@ class OrderDetails extends Model
     protected $fillable = [
         'order_id',
         'program_id',
+        'total',
         'quantity',
     ];
 
@@ -26,7 +27,7 @@ class OrderDetails extends Model
 
     public function program()
     {
-        return $this->belongsTo(Program::class);
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
     public function orderDetailOptions()
